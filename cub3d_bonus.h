@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:23:12 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/09 16:49:07 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/10 19:35:32 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,10 @@
 
 /*  Our defines  */
 
-// # define WIDTH(x)		(x * TILE_SIZE)			
-// # define HEIGHT(y)		(y * TILE_SIZE)
-
-# define PI			    3.14159265358979323846
+# define PI				3.14159265358979323846
 # define RED			"\033[1;31m"
-# define RESET		    "\033[0m"
-# define TILE_SIZE	    32
+# define RESET			"\033[0m"
+# define TILE_SIZE		32
 
 # define ESC_KEY		65307
 
@@ -72,13 +69,9 @@ typedef struct s_player
 {
 	float		x;
 	float		y;
-	// int			m_x;
-	// int			m_y;
 	float		fov;
 	double		angle;
 	int			count;
-	int			x_map;
-	int			y_map;
 	float		rot_ang;
 	float		movespeed;
 	float		rotationspeed;
@@ -87,6 +80,12 @@ typedef struct s_player
 	int			sidedirection;
 }				t_player;
 
+typedef struct s_door
+{
+	int	x;
+	int	y;
+}				t_door;
+
 typedef struct s_map
 {
 	int			fd;
@@ -94,28 +93,30 @@ typedef struct s_map
 	int			width;
 	t_tex		*west;
 	t_tex		*east;
+	int			door_c;
 	t_tex		*north;
 	t_tex		*south;
 	int			height;
+	t_door		*doors;
 	t_color		*colors;
 }				t_map;
 
-typedef struct s_ray
-{
-	int		x;
-	int		y;
-	int		hit;
-	float	side;
-	float	step_x;
-	float	step_y;
-	float	ray_dir_x;
-	float	ray_dir_y;
-	float	side_dist_x;
-	float	side_dist_y;
-	float	delta_dist_x;
-	float	delta_dist_y;
-	float	final_distance;
-}				t_ray;
+// typedef struct s_ray
+// {
+// 	int			x;
+// 	int			y;
+// 	int			hit;
+// 	float		side;
+// 	float		step_x;
+// 	float		step_y;
+// 	float		ray_dir_x;
+// 	float		ray_dir_y;
+// 	float		side_dist_x;
+// 	float		side_dist_y;
+// 	float		delta_dist_x;
+// 	float		delta_dist_y;
+// 	float		final_distance;
+// }				t_ray;
 
 typedef struct s_cub3d
 {
@@ -135,6 +136,8 @@ typedef struct s_cub3d
 }				t_cub3d;
 
 /*  All prototypes  */
+
+void	set_nb_doors(t_map *mapp);
 
 /*  Libs  */
 

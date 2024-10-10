@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 12:32:20 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/09 16:36:48 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/10 19:39:24 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	free_texture(t_cub3d *cub, t_tex *tex)
 
 void	free_map_element(t_cub3d *cub)
 {
+	if (cub->map->doors)
+		free(cub->map->doors);
 	if (cub->map->map)
 		free_double(cub->map->map);
 	if (cub->map)

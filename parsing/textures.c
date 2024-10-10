@@ -6,11 +6,51 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:20:27 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/09 18:57:05 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/10 19:36:41 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d_bonus.h"
+
+void set_nb_doors(t_map *mapp)
+{
+    int i, j;
+    char **map;
+
+    mapp->door_c = 0; // Initialize door count to zero
+    map = mapp->map;
+
+    // First pass: Count the number of doors
+    for (i = 0; map[i]; i++)
+    {
+        for (j = 0; map[i][j]; j++)
+        {
+            if (map[i][j] == 'D')
+                mapp->door_c++;
+        }
+    }
+
+    // Allocate memory for the doors array
+    mapp->doors = malloc(sizeof(t_door) * mapp->door_c); // Correctly allocate space for doors
+    if (!mapp->doors) // Check if memory allocation succeeded
+        return; // Handle allocation failure
+
+    // Second pass: Set the positions of doors
+    int k = 0;
+    for (i = 0; map[i]; i++)
+    {
+        for (j = 0; map[i][j]; j++)
+        {
+            if (map[i][j] == 'D')
+            {
+                mapp->doors[k].x = i; // Set the x-coordinate
+                mapp->doors[k].y = j; // Set the y-coordinate
+                k++;
+            }
+        }
+    }
+}
+
 
 void	add_texture(t_cub3d *cub, t_tex **tex, char *name)
 {
@@ -71,6 +111,8 @@ int	get_texture_color(t_tex *texture, int x, int y)
 {
 	char *dst;
 
+	if (x < 0 || y < 0 || x >= texture->width || y >= texture->height)
+		return (0);
 	dst = texture->add + (y * texture->szl + x * (texture->bpp / 8));
 	return (*(unsigned int *)dst);
 }

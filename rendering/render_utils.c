@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 12:51:08 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/09 20:16:21 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/10 19:06:08 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ void	my_mlx_pixel_put(t_cub3d *cub, float x, float y, int color)
 {
 	char	*dst;
 
-	if (x < 0 || y < 0 || x >= cub->map->width * TILE_SIZE
-		|| y >= cub->map->height * TILE_SIZE)
+	if (x < 0 || y < 0 || x >= cub->wov || y >= cub->hov)
 		return ;
 	dst = cub->add + (int)(y * cub->szl + x * (cub->bpp / 8));
 	*(unsigned int*)dst = color;
@@ -49,6 +48,8 @@ void	update(t_cub3d *cub)
 	float	movestep;
 
 	angle = 0;
+	new_x = 0;
+	new_y = 0;
 	if (cub->player->walkdirection)
 	{
 		movestep = cub->player->walkdirection * cub->player->movespeed;

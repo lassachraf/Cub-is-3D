@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:35:57 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/09 16:45:24 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/10 19:56:56 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ int	cub_loop(t_cub3d *cub)
 		mlx_destroy_image(cub->mlx, cub->img);
 	cub->img = mlx_new_image(cub->mlx, cub->wov, cub->hov);
 	cub->add = mlx_get_data_addr(cub->img, &cub->bpp, &cub->szl, &cub->end);
-	mlx_clear_window(cub->mlx, cub->win);
 	cast_fov(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img, 0, 0);
 	return (0);
