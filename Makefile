@@ -6,7 +6,7 @@
 #    By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 16:20:15 by alassiqu          #+#    #+#              #
-#    Updated: 2024/10/09 16:29:12 by alassiqu         ###   ########.fr        #
+#    Updated: 2024/10/11 15:19:06 by alassiqu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ LIBS		:=	libs/get-next-line/get_next_line.c			\
 				libs/memory/memory.c
 
 MAIN_UTILS	:=	main-utils/cub_loop.c						\
+				main-utils/doors.c							\
 				main-utils/math.c							\
 				main-utils/ray_distance.c
 

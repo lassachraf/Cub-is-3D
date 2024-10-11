@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:23:12 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/10 19:35:32 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:18:45 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@
 # define W_KEY			119
 # define D_KEY			100
 # define S_KEY			115
+
+# define C_KEY			99
+# define O_KEY			111
 
 # define DEG_TO_RAD(a)	((a) * PI / 180.0)
 
@@ -132,12 +135,14 @@ typedef struct s_cub3d
 	void		*add;
 	t_map		*map;
 	t_tex		*door;
+	int			oc_door;
 	t_player	*player;
 }				t_cub3d;
 
 /*  All prototypes  */
 
 void	set_nb_doors(t_map *mapp);
+int		check_if_player_in_wall(t_cub3d *cub);
 
 /*  Libs  */
 

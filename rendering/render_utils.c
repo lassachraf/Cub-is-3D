@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 12:51:08 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/10 19:06:08 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:23:07 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	is_walkable(t_cub3d *cub, float new_x, float new_y)
 	map_y = (int)new_y;
 	if (map_x >= 0 && map_x < cub->map->width
 		&& map_y >= 0 && map_y < cub->map->height
-		&& cub->map->map[map_y][map_x] != '1'
-		&& cub->map->map[map_y][map_x] != 'D')
+		&& (cub->map->map[map_y][map_x] != '1'
+		|| (cub->oc_door && cub->map->map[map_y][map_x] == 'D')))
 	{
 		cub->player->x = new_x;
 		cub->player->y = new_y;
@@ -80,6 +80,7 @@ int	reset(int keycode, t_cub3d *cub)
 
 int	ft_moving(int keycode, t_cub3d *cub)
 {
+	// printf(">> %d\n", keycode);
 	if (keycode == ESC_KEY)
 		ft_exit(cub);
 	else if (keycode == LEFT_ARROW)
@@ -94,6 +95,10 @@ int	ft_moving(int keycode, t_cub3d *cub)
 		cub->player->sidedirection = -1;
 	else if (keycode == D_KEY)
 		cub->player->sidedirection = 1;
+	else if (!cub->oc_door && keycode == O_KEY)
+		cub->oc_door = 1;
+	else if (cub->oc_door && keycode == C_KEY && !check_if_player_in_wall(cub))
+		cub->oc_door = 0;
 	update(cub);
 	reset(keycode, cub);
 	return (0);

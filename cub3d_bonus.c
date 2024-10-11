@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:06:54 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/10 19:56:10 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/11 15:17:06 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	init_cub3d_bonus(char *av)
 	if (cub == NULL)
 		ft_error(NULL, "Error: allocation failed.");
 	parsing(cub, av);
+	set_nb_doors(cub->map);
 	cub3d_bonus(cub);
 	general_free(cub);
 }
