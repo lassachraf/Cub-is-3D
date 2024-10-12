@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 19:23:15 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/11 15:00:58 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/12 18:34:53 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ float	calculate_ray_distance(t_cub3d *cub, float ray_angle)
 			map_y += step_y;
 			side = 1;  // Hit horizontal side (y-direction)
 		}
-		if (!cub->oc_door && cub->map->map[map_y][map_x] == 'D')
+		if (cub->map->map[map_y][map_x] == 'D' && !cub->oc_door)
 			hit = 2;
 		if (cub->map->map[map_y][map_x] == '1')
 			hit = 1;
@@ -89,7 +89,5 @@ float	calculate_ray_distance(t_cub3d *cub, float ray_angle)
 	}
 	if (hit == 2)
 		cub->side = 4;
-
-	return (perp_wall_dist);
 	return (perp_wall_dist);
 }

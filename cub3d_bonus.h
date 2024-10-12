@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:23:12 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/11 15:18:45 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/12 18:49:39 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ typedef struct s_cub3d
 /*  All prototypes  */
 
 void	set_nb_doors(t_map *mapp);
+int		player_in_doorway(t_cub3d *cub);
 int		check_if_player_in_wall(t_cub3d *cub);
 
 /*  Libs  */

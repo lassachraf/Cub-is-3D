@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:34:39 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/08 15:39:17 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/12 18:49:25 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,28 @@ int	is_it_player(char c)
 	return (c == 'W' || c == 'N' || c == 'S' || c == 'E');
 }
 
+int	player_in_doorway(t_cub3d *cub)
+{
+	int	player_map_x;
+	int	player_map_y;
+
+	player_map_x = (int)(cub->player->x);
+	player_map_y = (int)(cub->player->y);
+	if (cub->map->map[player_map_y][player_map_x] == 'D')
+	{
+		return (1);
+	}
+	return (0);
+}
+
 void	alloc_and_set(t_cub3d *cub)
 {
 	cub->player = calloc(1, sizeof(t_player));
 	if (cub->player == NULL)
 		ft_error(cub, "Error: allocation failed.");
 	cub->player->fov = DEG_TO_RAD(60);
-	cub->player->movespeed = 0.2;
+	// cub->player->movespeed = 0.2;
+	cub->player->movespeed = 3;
 	cub->player->rotationspeed = 3 * (PI / 180);
 }
 
