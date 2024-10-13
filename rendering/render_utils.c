@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 12:51:08 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/13 15:52:35 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/13 21:13:46 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ int	reset(int keycode, t_cub3d *cub)
 
 int	ft_moving(int keycode, t_cub3d *cub)
 {
-	printf("keycode > %d\n", keycode);
 	if (keycode == ESC_KEY)
 		ft_exit(cub);
 	else if (keycode == LEFT_ARROW)

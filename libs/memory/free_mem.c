@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 12:32:20 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/13 15:10:59 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/13 21:21:12 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	free_map_element(t_cub3d *cub)
 
 void	free_cub_element(t_cub3d *cub)
 {
+	if (cub->player->tex)
+		free_texture(cub, cub->player->tex);
 	if (cub->door)
 		free_texture(cub, cub->door);
 	if (cub->player)
@@ -61,10 +63,7 @@ void	free_cub_element(t_cub3d *cub)
 	if (cub->win)
 		mlx_destroy_window(cub->mlx, cub->win);
 	if (cub->mlx)
-	{
-		// mlx_destroy_display(cub->mlx);
 		free(cub->mlx);
-	}
 	free(cub);
 }
 

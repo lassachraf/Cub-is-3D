@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:35:57 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/13 20:52:32 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/13 21:43:16 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,52 +135,31 @@ void draw_minimap(t_cub3d *cub)
 	draw_circle(cub, player_x, player_y, player_radius, 0xFF4500);  // Orange red for the player
 }
 
-// void	load_player_image(t_cub3d *cub)
-// {
-// 	cub->player->tex = ft_calloc(1, sizeof(t_tex));
-// 	if (cub->player->tex == NULL)
-// 		ft_error(cub, "Error: allocation failed.");
-// 	cub->player->tex->img = mlx_xpm_file_to_image(cub->mlx, "../animation/player-frame-0.xpm", &cub->player->tex->width, &cub->player->tex->height);
-// 	if (cub->player->tex->img == NULL)
-// 		ft_error(cub, "Error: loading player image failed.");
-// 	cub->player->tex->add = mlx_get_data_addr(cub->player->tex->img, &cub->player->tex->bpp, &cub->player->tex->szl, &cub->player->tex->end);
-// }
+void    put_player(t_cub3d *cub)
+{
+	int				i;
+	int				j;
+	unsigned int	color;
 
-// void	my_mlx_pixel_put_2(t_tex *cub, float x, float y, int color)
-// {
-// 	char	*dst;
+	if (cub->player->tex == NULL || cub->player->tex->img == NULL)
+		return;
 
-// 	if (x < 0 || y < 0 || x >= cub->width || y >= cub->height)
-// 		return ;
-// 	dst = cub->add + (int)(y * cub->szl + x * (cub->bpp / 8));
-// 	*(unsigned int*)dst = color;
-// }
-
-// void    put_player(t_cub3d *cub)
-// {
-// 	int				i;
-// 	int				j;
-// 	unsigned int	color;
-
-// 	if (cub->player->tex == NULL || cub->player->tex->img == NULL)
-// 		return;
-
-// 	i = 0;
-// 	while (i < cub->player->tex->height && i < cub->hov)
-// 	{
-// 		j = 0;
-// 		while (j < cub->player->tex->width && cub->player->x + j < cub->wov)
-// 		{
-// 			color = get_texture_color(cub->player->tex, i, j);
-// 			printf("color > %x\n", color);
-// 			if (color != 0xFF000000)
-// 				my_mlx_pixel_put_2(cub->player->tex, j, i, color); // Place pixel on main image
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// 	mlx_put_image_to_window(cub->mlx, cub->win, cub->player->tex->img, 0, 0);
-// }
+	i = 0;
+	while (i < cub->player->tex->height)
+	{
+		j = 0;
+		while (j < cub->player->tex->width)
+		{
+			color = get_texture_color(cub->player->tex, i, j);
+			printf("color > %x\n", color);
+			if (color != 0xFF000000)
+				my_mlx_pixel_put(cub, i, j, color); // Place pixel on main image
+			j++;
+		}
+		i++;
+	}
+	// mlx_put_image_to_window(cub->mlx, cub->win, cub->player->tex->img, 0, 0);
+}
 
 
 int	cub_loop(t_cub3d *cub)
@@ -191,7 +170,7 @@ int	cub_loop(t_cub3d *cub)
 	cub->add = mlx_get_data_addr(cub->img, &cub->bpp, &cub->szl, &cub->end);
 	cast_fov(cub);
 	draw_minimap(cub);
-	// put_player(cub);
+	put_player(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img, 0, 0);
 	return (0);
 }
