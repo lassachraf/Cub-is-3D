@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 12:32:20 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/10 19:39:24 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/13 15:10:59 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	free_texture(t_cub3d *cub, t_tex *tex)
 		free(tex->file);
 	if (tex->img)
 		mlx_destroy_image(cub->mlx, tex->img);
-	// if (tex->add)
-	// 	free(tex->add);
 	free(tex);
 }
 
@@ -64,7 +62,7 @@ void	free_cub_element(t_cub3d *cub)
 		mlx_destroy_window(cub->mlx, cub->win);
 	if (cub->mlx)
 	{
-		mlx_destroy_display(cub->mlx);;
+		// mlx_destroy_display(cub->mlx);
 		free(cub->mlx);
 	}
 	free(cub);
@@ -86,5 +84,5 @@ void	free_double(char **s)
 	i = 0;
 	while (s[i])
 		free(s[i++]);
-	free(s);	
+	free(s);
 }

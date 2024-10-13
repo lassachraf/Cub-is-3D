@@ -6,7 +6,7 @@
 #    By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 16:20:15 by alassiqu          #+#    #+#              #
-#    Updated: 2024/10/11 15:19:06 by alassiqu         ###   ########.fr        #
+#    Updated: 2024/10/13 18:54:24 by alassiqu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,9 +34,11 @@ LIBS		:=	libs/get-next-line/get_next_line.c			\
 				libs/memory/free_mem.c						\
 				libs/memory/memory.c
 
-MAIN_UTILS	:=	main-utils/cub_loop.c						\
-				main-utils/doors.c							\
+# This is bonus main-utils
+MAIN_UTILS	:=	main-utils/collision.c						\
+				main-utils/cub_loop.c						\
 				main-utils/math.c							\
+				main-utils/minimap.c							\
 				main-utils/ray_distance.c
 
 # This is bonus parsing.

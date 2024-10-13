@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 12:51:08 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/12 19:41:57 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/13 15:52:35 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,40 +20,6 @@ void	my_mlx_pixel_put(t_cub3d *cub, float x, float y, int color)
 		return ;
 	dst = cub->add + (int)(y * cub->szl + x * (cub->bpp / 8));
 	*(unsigned int*)dst = color;
-}
-
-int	collision_effect(t_cub3d *cub, float new_x, float new_y)
-{
-	int		counter;
-	float	map_x;
-	float	map_y;
-
-	counter = 0;
-	map_x = ((cub->player->x * TILE_SIZE) + new_x);
-	map_y = ((cub->player->y * TILE_SIZE) + new_y);
-	if (map_x >= 0 && map_x < cub->wov
-		&& map_y >= 0 && map_y < cub->hov)
-	{
-		if (cub->map->map[(int)cub->player->y][(int)(map_x + 5) / TILE_SIZE] != '1'
-			&& cub->map->map[(int)cub->player->y][(int)(map_x - 5) / TILE_SIZE] != '1')
-			// && cub->map->map[(int)cub->player->y][(int)(map_x + 5) / TILE_SIZE] != 'D'
-			// && cub->map->map[(int)cub->player->y][(int)(map_x - 5) / TILE_SIZE] != 'D')
-			{
-				cub->player->x = map_x / TILE_SIZE;
-				counter++;
-			}
-		if (cub->map->map[(int)(map_y + 5) / TILE_SIZE][(int)cub->player->x] != '1'
-			&& cub->map->map[(int)(map_y - 5) / TILE_SIZE][(int)cub->player->x] != '1')
-			// && cub->map->map[(int)(map_y + 5) / TILE_SIZE][(int)cub->player->x] != 'D'
-			// && cub->map->map[(int)(map_y - 5) / TILE_SIZE][(int)cub->player->x] != 'D')
-			{
-				counter++;
-				cub->player->y = map_y / TILE_SIZE;
-			}
-		if (counter == 2)
-			return (printf("yep\n"), 1);
-	}
-	return (0);
 }
 
 void	is_walkable(t_cub3d *cub, float new_x, float new_y)
@@ -72,23 +38,16 @@ void	is_walkable(t_cub3d *cub, float new_x, float new_y)
 		{
 			if (cub->oc_door == 1)
 			{
-				printf("Walkable >> Door are open.\n");
 				cub->player->x = map_x;
 				cub->player->y = map_y;
 			}
-			else
-				printf("Walkable >> Doors are closed.\n");
-			return ;
 		}
 		else if (cub->map->map[(int)map_y][(int)map_x] != '1')
 		{
-			printf("Walkable >> Not a wall.\n");
 			cub->player->x = map_x;
 			cub->player->y = map_y;
-			return ;
 		}
 	}
-	printf("Not walkable x and y.\n");
 }
 
 void	update(t_cub3d *cub)
@@ -132,6 +91,7 @@ int	reset(int keycode, t_cub3d *cub)
 
 int	ft_moving(int keycode, t_cub3d *cub)
 {
+	printf("keycode > %d\n", keycode);
 	if (keycode == ESC_KEY)
 		ft_exit(cub);
 	else if (keycode == LEFT_ARROW)
@@ -151,6 +111,8 @@ int	ft_moving(int keycode, t_cub3d *cub)
 	else if (keycode == C_KEY && cub->oc_door == 1
 		&& !player_in_doorway(cub))
 		cub->oc_door = 0;
+	else if (keycode == 103)
+		cub->person = !cub->person;
 	update(cub);
 	reset(keycode, cub);
 	return (0);

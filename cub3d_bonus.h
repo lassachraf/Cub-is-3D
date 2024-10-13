@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:23:12 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/12 18:49:39 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/13 18:50:21 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@
 
 # define DEG_TO_RAD(a)	((a) * PI / 180.0)
 
+# define MINIMAP_SCALE	0.2
+# define PLAYER_RADIUS	3
+#define LINE_LENGTH		10
+
+
 /*  All structs  */
 
 typedef struct s_tex
@@ -73,6 +78,7 @@ typedef struct s_player
 	float		x;
 	float		y;
 	float		fov;
+	t_tex		*tex;
 	double		angle;
 	int			count;
 	float		rot_ang;
@@ -135,6 +141,8 @@ typedef struct s_cub3d
 	void		*add;
 	t_map		*map;
 	t_tex		*door;
+	t_tex		*fst_p;
+	int			person;
 	int			oc_door;
 	t_player	*player;
 }				t_cub3d;
@@ -143,7 +151,8 @@ typedef struct s_cub3d
 
 void	set_nb_doors(t_map *mapp);
 int		player_in_doorway(t_cub3d *cub);
-int		check_if_player_in_wall(t_cub3d *cub);
+
+void	draw_minimap(t_cub3d *cub);
 
 /*  Libs  */
 
@@ -155,6 +164,8 @@ void	free_map_element(t_cub3d *cub);
 void	free_cub_element(t_cub3d *cub);
 
 /*  Main-utils  */
+
+int		collision_effect(t_cub3d *cub, float new_x, float new_y);
 
 void	cast_fov(t_cub3d *cub);
 int		cub_loop(t_cub3d *cub);
@@ -221,7 +232,5 @@ int		reset(int keycode, t_cub3d *cub);
 int		ft_moving(int keycode, t_cub3d *cub);
 void	is_walkable(t_cub3d *cub, float new_x, float new_y);
 void	my_mlx_pixel_put(t_cub3d *cub, float x, float y, int color);
-
-
 
 #endif /* CUB3D_H */

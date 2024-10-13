@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:34:39 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/12 18:49:25 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/13 18:59:29 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ void	alloc_and_set(t_cub3d *cub)
 	if (cub->player == NULL)
 		ft_error(cub, "Error: allocation failed.");
 	cub->player->fov = DEG_TO_RAD(60);
-	// cub->player->movespeed = 0.2;
-	cub->player->movespeed = 3;
+	cub->player->movespeed = 5;
 	cub->player->rotationspeed = 3 * (PI / 180);
 }
 

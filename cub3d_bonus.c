@@ -6,11 +6,27 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:06:54 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/12 20:44:04 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/13 14:00:47 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+
+int	ft_mouse(int x, int y, t_cub3d *cub)
+{
+	(void)y;
+	static int last_x = -1;
+
+	if (last_x != -1)
+	{
+		if (x > last_x)
+			cub->player->rot_ang += 0.02;
+		else if (x < last_x)
+			cub->player->rot_ang -= 0.02;
+	}
+	last_x = x;
+	return (0);
+}
 
 void	cub3d_bonus(t_cub3d *cub)
 {
@@ -26,6 +42,7 @@ void	cub3d_bonus(t_cub3d *cub)
 	load_textures(cub);
 	mlx_loop_hook(cub->mlx, cub_loop, cub);
 	mlx_hook(cub->win, 2, 1L << 0, ft_moving, cub);
+	mlx_hook(cub->win, 6, 1L << 6, ft_mouse, cub);
 	mlx_loop(cub->mlx);
 }
 
