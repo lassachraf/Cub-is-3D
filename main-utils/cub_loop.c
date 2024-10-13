@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:35:57 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/13 21:43:16 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/13 22:52:18 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,21 +139,24 @@ void    put_player(t_cub3d *cub)
 {
 	int				i;
 	int				j;
+	int				k;
+	int				l;
 	unsigned int	color;
 
 	if (cub->player->tex == NULL || cub->player->tex->img == NULL)
 		return;
 
-	i = 0;
+	i = (cub->hov / 2) - (cub->player->tex->height / 2);
+	k = i;
+	l = (cub->wov / 2) - (cub->player->tex->width / 2);
 	while (i < cub->player->tex->height)
 	{
-		j = 0;
+		j = (cub->wov / 2) - (cub->player->tex->width / 2);
 		while (j < cub->player->tex->width)
 		{
 			color = get_texture_color(cub->player->tex, i, j);
-			printf("color > %x\n", color);
 			if (color != 0xFF000000)
-				my_mlx_pixel_put(cub, i, j, color); // Place pixel on main image
+				my_mlx_pixel_put(cub, i + k, j + l, color); // Place pixel on main image
 			j++;
 		}
 		i++;
