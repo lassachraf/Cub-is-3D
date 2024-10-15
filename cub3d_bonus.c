@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:06:54 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/15 12:49:09 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/15 16:33:45 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	cub3d_bonus(t_cub3d *cub)
 	cub->img = mlx_new_image(cub->mlx, size_x, size_y);
 	cub->add = mlx_get_data_addr(cub->img, &cub->bpp, &cub->szl, &cub->end);
 	load_textures(cub);
-	load_player(cub);
+	// load_player(cub);
 	mlx_loop_hook(cub->mlx, cub_loop, cub);
 	mlx_hook(cub->win, 6, 1L << 6, ft_mouse, cub);
 	mlx_hook(cub->win, 2, 1L << 0, ft_moving, cub);

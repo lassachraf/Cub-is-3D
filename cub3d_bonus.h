@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:23:12 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/15 12:49:02 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/15 16:39:54 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,9 +159,8 @@ int		player_in_doorway(t_cub3d *cub);
 
 void	draw_minimap(t_cub3d *cub);
 
-// int		gun_shots(t_cub3d *cub);
 void	load_player(t_cub3d *cub);
-int		gun_shots(t_cub3d *cub, int x, int y);
+int		gun_shots(t_cub3d *cub, int flag);
 void	load_player_frame(t_cub3d *cub, int nb);
 // void	load_player_image(t_cub3d *cub, int nb);
 // void	load_player(t_cub3d *cub);

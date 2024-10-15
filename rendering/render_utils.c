@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 12:51:08 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/15 13:06:15 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/15 19:45:19 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ int	ft_moving(int keycode, t_cub3d *cub)
 	else if (keycode == C_KEY && cub->oc_door == 1
 		&& !player_in_doorway(cub))
 		cub->oc_door = 0;
-	else if (keycode == G_KEY)
-		cub->person++;
+	else if (keycode == G_KEY && printf("Shooting now!\n"))
+		cub->person = 1;
 	// else if (keycode == R_KEY) // R keycode;
 	// 	cub->reload = 1;
 	update(cub);

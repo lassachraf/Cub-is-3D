@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:35:57 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/15 13:05:05 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/15 19:44:37 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,39 @@ void draw_minimap(t_cub3d *cub)
 	draw_circle(cub, player_x, player_y, player_radius, 0xFF4500);  // Orange red for the player
 }
 
+// void	put_player(t_cub3d *cub)
+// {
+// 	int				i;
+// 	int				j;
+// 	int 			x_pos;
+// 	int				y_pos;
+// 	unsigned int	color;
+
+// 	if (cub->fstp == NULL || cub->fstp->img == NULL)
+// 		return;
+// 	x_pos = (cub->wov / 2) - (cub->fstp->width / 2);
+// 	y_pos = cub->hov - cub->fstp->height + 1;
+// 	if (cub->person && gun_shots(cub, x_pos, y_pos))
+// 		return ;
+// 	if (cub->person == 3)
+// 		printf("should be reloaded\n");
+// 	i = -1;
+// 	while (++i < cub->fstp->height)
+// 	{
+// 		j = -1;
+// 		while (++j < cub->fstp->width)
+// 		{
+// 			color = get_texture_color(cub->fstp, j, i);
+// 			if (color != 0xFF000000)
+// 				my_mlx_pixel_put(cub, x_pos + j, y_pos + i, color);
+// 		}
+// 	}
+// }
+
 void	put_player(t_cub3d *cub)
 {
+	static int		frame = 0;
+	static int		delay = 0;
 	int				i;
 	int				j;
 	int 			x_pos;
@@ -144,13 +175,22 @@ void	put_player(t_cub3d *cub)
 	unsigned int	color;
 
 	if (cub->fstp == NULL || cub->fstp->img == NULL)
-		return;
+		return ;
+
+	// Define x and y positions for the player texture
 	x_pos = (cub->wov / 2) - (cub->fstp->width / 2);
 	y_pos = cub->hov - cub->fstp->height + 1;
-	if (cub->person && gun_shots(cub, x_pos, y_pos))
-		return ;
-	if (cub->person == 3)
-		printf("should be reloaded\n");
+
+	// Delay and frame control logic
+	delay++;
+	if (delay >= 10) // Adjust '10' to control the animation speed (lower = faster)
+	{
+		frame = (frame + 1) % 3; // Assuming you have 3 frames (0, 1, 2)
+		load_player_frame(cub, frame);
+		delay = 0;
+	}
+
+	// Render the current frame
 	i = -1;
 	while (++i < cub->fstp->height)
 	{
@@ -158,24 +198,29 @@ void	put_player(t_cub3d *cub)
 		while (++j < cub->fstp->width)
 		{
 			color = get_texture_color(cub->fstp, j, i);
-			if (color != 0xFF000000)
+			if (color != 0xFF000000) // Don't draw fully transparent pixels
 				my_mlx_pixel_put(cub, x_pos + j, y_pos + i, color);
 		}
 	}
 }
 
+
 int	cub_loop(t_cub3d *cub)
 {
-	// static int	pf;
-
 	if (cub->img)
 		mlx_destroy_image(cub->mlx, cub->img);
 	cub->img = mlx_new_image(cub->mlx, cub->wov, cub->hov);
 	cub->add = mlx_get_data_addr(cub->img, &cub->bpp, &cub->szl, &cub->end);
 	cast_fov(cub);
 	draw_minimap(cub);
-	put_player(cub);
-	mlx_put_image_to_window(cub->mlx, cub->win, cub->img, 0, 0);
 	load_player(cub);
+	if (cub->person == 1)
+	{
+		gun_shots(cub, 0);
+		cub->person = 0;
+	}
+	else
+		gun_shots(cub, 1);
+	mlx_put_image_to_window(cub->mlx, cub->win, cub->img, 0, 0);
 	return (0);
 }
