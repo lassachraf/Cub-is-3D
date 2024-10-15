@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:23:12 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/13 18:50:21 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:49:02 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@
 
 # define C_KEY			99
 # define O_KEY			111
+
+# define G_KEY			103
+# define R_KEY			114
 
 # define DEG_TO_RAD(a)	((a) * PI / 180.0)
 
@@ -140,11 +143,13 @@ typedef struct s_cub3d
 	void		*img;
 	void		*add;
 	t_map		*map;
+	t_tex		*gun;
 	t_tex		*door;
-	t_tex		*fst_p;
+	t_tex		*fstp;
 	int			person;
 	int			oc_door;
 	t_player	*player;
+	int			gun_shots;
 }				t_cub3d;
 
 /*  All prototypes  */
@@ -153,6 +158,13 @@ void	set_nb_doors(t_map *mapp);
 int		player_in_doorway(t_cub3d *cub);
 
 void	draw_minimap(t_cub3d *cub);
+
+// int		gun_shots(t_cub3d *cub);
+void	load_player(t_cub3d *cub);
+int		gun_shots(t_cub3d *cub, int x, int y);
+void	load_player_frame(t_cub3d *cub, int nb);
+// void	load_player_image(t_cub3d *cub, int nb);
+// void	load_player(t_cub3d *cub);
 
 /*  Libs  */
 

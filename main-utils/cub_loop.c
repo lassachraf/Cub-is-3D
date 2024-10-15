@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:35:57 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/13 22:52:18 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/15 13:05:05 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,38 +135,39 @@ void draw_minimap(t_cub3d *cub)
 	draw_circle(cub, player_x, player_y, player_radius, 0xFF4500);  // Orange red for the player
 }
 
-void    put_player(t_cub3d *cub)
+void	put_player(t_cub3d *cub)
 {
 	int				i;
 	int				j;
-	int				k;
-	int				l;
+	int 			x_pos;
+	int				y_pos;
 	unsigned int	color;
 
-	if (cub->player->tex == NULL || cub->player->tex->img == NULL)
+	if (cub->fstp == NULL || cub->fstp->img == NULL)
 		return;
-
-	i = (cub->hov / 2) - (cub->player->tex->height / 2);
-	k = i;
-	l = (cub->wov / 2) - (cub->player->tex->width / 2);
-	while (i < cub->player->tex->height)
+	x_pos = (cub->wov / 2) - (cub->fstp->width / 2);
+	y_pos = cub->hov - cub->fstp->height + 1;
+	if (cub->person && gun_shots(cub, x_pos, y_pos))
+		return ;
+	if (cub->person == 3)
+		printf("should be reloaded\n");
+	i = -1;
+	while (++i < cub->fstp->height)
 	{
-		j = (cub->wov / 2) - (cub->player->tex->width / 2);
-		while (j < cub->player->tex->width)
+		j = -1;
+		while (++j < cub->fstp->width)
 		{
-			color = get_texture_color(cub->player->tex, i, j);
+			color = get_texture_color(cub->fstp, j, i);
 			if (color != 0xFF000000)
-				my_mlx_pixel_put(cub, i + k, j + l, color); // Place pixel on main image
-			j++;
+				my_mlx_pixel_put(cub, x_pos + j, y_pos + i, color);
 		}
-		i++;
 	}
-	// mlx_put_image_to_window(cub->mlx, cub->win, cub->player->tex->img, 0, 0);
 }
-
 
 int	cub_loop(t_cub3d *cub)
 {
+	// static int	pf;
+
 	if (cub->img)
 		mlx_destroy_image(cub->mlx, cub->img);
 	cub->img = mlx_new_image(cub->mlx, cub->wov, cub->hov);
@@ -175,5 +176,6 @@ int	cub_loop(t_cub3d *cub)
 	draw_minimap(cub);
 	put_player(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img, 0, 0);
+	load_player(cub);
 	return (0);
 }

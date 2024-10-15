@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:06:54 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/13 21:31:11 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/15 12:49:09 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,6 @@ int	ft_mouse(int x, int y, t_cub3d *cub)
 	return (0);
 }
 
-void	load_player_image(t_cub3d *cub)
-{
-	cub->player->tex = ft_calloc(1, sizeof(t_tex));
-	if (cub->player->tex == NULL)
-		ft_error(cub, "Error: allocation failed.");
-	cub->player->tex->img = mlx_xpm_file_to_image(cub->mlx, "animation/player-frame-0.xpm", &cub->player->tex->width, &cub->player->tex->height);
-	if (cub->player->tex->img == NULL)
-		ft_error(cub, "Error: loading player image failed.");
-	cub->player->tex->add = mlx_get_data_addr(cub->player->tex->img, &cub->player->tex->bpp, &cub->player->tex->szl, &cub->player->tex->end);
-}
-
 void	cub3d_bonus(t_cub3d *cub)
 {
 	int	size_x;
@@ -51,7 +40,7 @@ void	cub3d_bonus(t_cub3d *cub)
 	cub->img = mlx_new_image(cub->mlx, size_x, size_y);
 	cub->add = mlx_get_data_addr(cub->img, &cub->bpp, &cub->szl, &cub->end);
 	load_textures(cub);
-	load_player_image(cub);
+	load_player(cub);
 	mlx_loop_hook(cub->mlx, cub_loop, cub);
 	mlx_hook(cub->win, 6, 1L << 6, ft_mouse, cub);
 	mlx_hook(cub->win, 2, 1L << 0, ft_moving, cub);
@@ -66,6 +55,9 @@ void	init_cub3d_bonus(char *av)
 	if (cub == NULL)
 		ft_error(NULL, "Error: allocation failed.");
 	parsing(cub, av);
+	cub->fstp = ft_calloc(1, sizeof(t_tex));
+	if (cub->fstp == NULL)
+		ft_error(cub, "Error: allocation failed.");
 	cub3d_bonus(cub);
 	general_free(cub);
 }
