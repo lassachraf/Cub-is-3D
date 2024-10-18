@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:34:39 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/13 18:59:29 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:17:16 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ void	get_player(t_cub3d *cub)
 		{
 			if (is_it_player(map[i][j]))
 			{
-				cub->player->angle = get_angle(map[i][j]);
-				cub->player->x = j;
-				cub->player->y = i;
+				cub->player->rot_ang = get_angle(map[i][j]);
+				cub->player->x = j + 0.5;
+				cub->player->y = i + 0.5;
 				cub->player->count++;
 			}
 		}

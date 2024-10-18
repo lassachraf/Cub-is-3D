@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:55:30 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/18 11:24:00 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:04:17 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,19 +90,30 @@ void	get_file_content(t_cub3d *cub)
 	get_2d_map(cub, line);
 	get_player(cub);
 	close(cub->map->fd);
-	cub->hov = cub->map->height * TILE_SIZE;
-	cub->wov = cub->map->width * TILE_SIZE;
 }
 
 void	parsing(t_cub3d *cub, char *av)
 {
+	int	i;
+
+	ft_extension(av, ".cub");
 	cub->map = ft_calloc(1, sizeof(*cub->map));
 	if (cub->map == NULL)
 		ft_error(cub, "Error: allocation failed.");
 	cub->map->fd = open(av, O_RDONLY);
 	if (cub->map->fd == -1)
-		ft_error(cub, "Error: allocation failed.");
+		ft_error(cub, "Error: open failed.");
 	get_file_content(cub);
 	close(cub->map->fd);
-	create_texture(&cub, 5, "textures/Door.xpm");
+	create_texture(&cub, 5, "textures/door1.xpm");
+	i = -1;
+	while (++i < 5)
+	{
+		cub->map->ani[i] = ft_calloc(1, sizeof(t_tex));
+		if (cub->map->ani[i] == NULL)
+			ft_error(cub, "Error: allocation failed.");
+	}
+	cub->fstp = ft_calloc(1, sizeof(t_tex));
+	if (cub->fstp == NULL)
+		ft_error(cub, "Error: allocation failed.");
 }

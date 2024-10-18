@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:15:55 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/18 12:10:09 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/18 15:03:55 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 int	check_the_xs(t_cub3d *cub, float pt)
 {
-	if (cub->map->map[(int)cub->player->y][(int)(pt + 5) / TILE_SIZE] != '1'
-		&& cub->map->map[(int)cub->player->y][(int)(pt - 5) / TILE_SIZE] != '1'
-		&& (cub->map->map[(int)cub->player->y][(int)(pt + 5) / TILE_SIZE] != 'D'
+	if (cub->map->map[(int)cub->player->y][(int)(pt + 2) / TILE_SIZE] != '1'
+		&& cub->map->map[(int)cub->player->y][(int)(pt - 2) / TILE_SIZE] != '1'
+		&& (cub->map->map[(int)cub->player->y][(int)(pt + 2) / TILE_SIZE] != 'D'
 		|| cub->oc_door == 1)
-		&& (cub->map->map[(int)cub->player->y][(int)(pt - 5) / TILE_SIZE] != 'D'
+		&& (cub->map->map[(int)cub->player->y][(int)(pt - 2) / TILE_SIZE] != 'D'
 		|| cub->oc_door == 1))
 		return (1);
 	return (0);
@@ -27,11 +27,11 @@ int	check_the_xs(t_cub3d *cub, float pt)
 
 int	check_the_ys(t_cub3d *cub, float pt)
 {
-	if (cub->map->map[(int)(pt + 5) / TILE_SIZE][(int)cub->player->x] != '1'
-		&& cub->map->map[(int)(pt - 5) / TILE_SIZE][(int)cub->player->x] != '1'
-		&& (cub->map->map[(int)(pt + 5) / TILE_SIZE][(int)cub->player->x] != 'D'
+	if (cub->map->map[(int)(pt + 2) / TILE_SIZE][(int)cub->player->x] != '1'
+		&& cub->map->map[(int)(pt - 2) / TILE_SIZE][(int)cub->player->x] != '1'
+		&& (cub->map->map[(int)(pt + 2) / TILE_SIZE][(int)cub->player->x] != 'D'
 		|| cub->oc_door == 1)
-		&& (cub->map->map[(int)(pt - 5) / TILE_SIZE][(int)cub->player->x] != 'D'
+		&& (cub->map->map[(int)(pt - 2) / TILE_SIZE][(int)cub->player->x] != 'D'
 		|| cub->oc_door == 1))
 		return (1);
 	return (0);

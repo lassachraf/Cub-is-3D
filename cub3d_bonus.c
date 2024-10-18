@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:06:54 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/18 10:00:03 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:00:25 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,26 @@ int	ft_mouse(int x, int y, t_cub3d *cub)
 	return (0);
 }
 
+
+void fill_window_with_red(t_cub3d *cub)
+{
+    int x;
+    int y;
+
+    // Set the color to red (0xFF0000)
+    int red_color = 0xFF0000;
+
+    // Loop over all pixels in the window
+    for (y = 0; y < cub->hov; y++)
+    {
+        for (x = 0; x < cub->wov; x++)
+        {
+            mlx_pixel_put(cub->mlx, cub->win, x, y, red_color);
+        }
+    }
+}
+
+
 void	cub3d_bonus(t_cub3d *cub)
 {
 	cub->wov = 1900;
@@ -36,8 +56,8 @@ void	cub3d_bonus(t_cub3d *cub)
 	cub->win = mlx_new_window(cub->mlx, cub->wov, cub->hov, "The Cub-is-3D !!!");
 	cub->img = mlx_new_image(cub->mlx, cub->wov, cub->hov);
 	cub->add = mlx_get_data_addr(cub->img, &cub->bpp, &cub->szl, &cub->end);
+	// fill_window_with_red(cub);
 	load_textures(cub);
-	// load_player(cub);
 	mlx_loop_hook(cub->mlx, cub_loop, cub);
 	mlx_hook(cub->win, 6, 1L << 6, ft_mouse, cub);
 	mlx_hook(cub->win, 2, 1L << 0, ft_moving, cub);
@@ -53,12 +73,6 @@ void	init_cub3d_bonus(char *av)
 	if (cub == NULL)
 		ft_error(NULL, "Error: allocation failed.");
 	parsing(cub, av);
-
-	for(int i = 0; i < 5; i++)
-		cub->map->ani[i] = ft_calloc(1, sizeof(t_tex));
-	cub->fstp = ft_calloc(1, sizeof(t_tex)); // here !!
-	if (cub->fstp == NULL)
-		ft_error(cub, "Error: allocation failed.");
 	cub3d_bonus(cub);
 	general_free(cub);
 }
