@@ -48,7 +48,7 @@ void	set_textures(t_cub3d *cub, t_tex **tex)
 		*tex = cub->door;
 }
 
-void draw_wall_slice(t_cub3d *cub, int x, int wall_height, float ray_distance)
+void draw_wall_slice(t_cub3d *cub, int x, int wall_height, float ray_distance, float curr_ang)
 {
     int start = (cub->hov / 2) - (wall_height / 2);  // Starting point for drawing the wall slice
     int end = (cub->hov / 2) + (wall_height / 2);    // Ending point
@@ -63,13 +63,26 @@ void draw_wall_slice(t_cub3d *cub, int x, int wall_height, float ray_distance)
         start = 0;
     if (end > cub->hov)
         end = cub->hov;
-    // Calculate tex_x based on the wall hit position
-    if (cub->side == 0 || cub->side == 1) // North or South
-        tex_x = (int)(cub->player->x + (ray_distance - (int)ray_distance)) * texture->width; // Adjust as needed
-    else // East or West
-        tex_x = (int)(cub->player->y + (ray_distance - (int)ray_distance)) * texture->width; // Adjust as needed
     
-    tex_x = (int)tex_x % texture->width; // Ensure tex_x is within texture bounds
+
+	float wall_x;
+	float ray_dir_x = cos(curr_ang);
+	float ray_dir_y = sin(curr_ang);
+
+
+
+    if (cub->side == 2 || cub->side == 3)
+		wall_x = cub->player->y + ray_distance * ray_dir_y;
+    else 
+		wall_x = cub->player->x + ray_distance * ray_dir_x;
+
+	wall_x -= floor((wall_x));
+
+	tex_x = wall_x * texture->width;
+	if (cub->side == 0 && ray_dir_x > 0)
+		tex_x = texture->width - tex_x - 1;
+	if (cub->side == 1 && ray_dir_y < 0)
+		tex_x = texture->width - tex_x - 1;
 
     for (int y = start; y < end; y++)
     {

@@ -38,7 +38,6 @@ void	load_player_frame(t_cub3d *cub, int nb)
 		mlx_destroy_image(cub->mlx, cub->fstp->img);
 	cub->fstp->file = ft_strjoin(tmp, ".xpm");
 	free(tmp);
-	printf("frame >> %d >> %s\n", nb, cub->fstp->file);
 	cub->fstp->img = mlx_xpm_file_to_image(cub->mlx, cub->fstp->file,
 		&cub->fstp->width, &cub->fstp->height);
 	if (cub->fstp->img == NULL)
@@ -47,55 +46,53 @@ void	load_player_frame(t_cub3d *cub, int nb)
 		&cub->fstp->szl, &cub->fstp->end);
 }
 
-void	draw_gun(t_cub3d *cub, int x, int y)
+void	draw_gun(t_cub3d *cub, int index)
 {
 	int				i;
 	int				j;
 	unsigned int	color;
+	int				x;
+	int				y;
+	x = (cub->wov / 2) - (cub->map->ani[index]->width / 2);
+	y = cub->hov - cub->map->ani[index]->height + 1;
+
 
 	i = -1;
-	while (++i < cub->fstp->height)
+	while (++i < cub->map->ani[index]->height)
 	{
 		j = -1;
-		while (++j < cub->fstp->width)
+		while (++j < cub->map->ani[index]->width)
 		{
-			color = get_texture_color(cub->fstp, j, i);
+			color = get_texture_color(cub->map->ani[index], j, i);
 			if (color != 0xFF000000)
 				my_mlx_pixel_put(cub, x + j, y + i, color);
 		}
 	}
 }
 
-int	gun_shots(t_cub3d *cub, int flag)
-{
-	int				x_pos;
-	int				y_pos;
-	static int		frame = 0;
-	static int		delay = 1;
 
-	if (cub->fstp == NULL || cub->fstp->img == NULL)
-		return (1);
-	x_pos = (cub->wov / 2) - (cub->fstp->width / 2);
-	y_pos = cub->hov - cub->fstp->height + 1;
-	while (delay && flag == 0)
+int	gun_shots(t_cub3d *cub)
+{
+	static int				delay = 0;
+	
+	delay++;
+
+	if (delay <=  1)
+		draw_gun(cub, 1);
+	else if (delay  <=  2)
+		draw_gun(cub, 2);
+	else if (delay <=  3)
+		draw_gun(cub, 3);
+	else if (delay <=  4)
+		draw_gun(cub, 4);
+	else if (delay <=  5)
 	{
-		delay++;
-		if (delay < 40)
-			frame = 0;
-		else if (delay <= 80)
-			frame = 1;
-		else if (delay <= 120)
-			frame = 2;
-		else if (delay <= 160)
-			frame = 3;
-		else if (delay <= 190)
-			frame = 4;
-		else if (delay <= 220)
-			frame = 5;
-		else if (delay > 240)
-			delay = 0;
-		load_player_frame(cub, frame);
+		draw_gun(cub, 0);
+		cub->person = 0;
+		delay = 0;
 	}
-	draw_gun(cub, x_pos, y_pos);
+				
+
+	
 	return (1);
 }

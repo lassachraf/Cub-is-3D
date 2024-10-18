@@ -54,6 +54,7 @@
 #define LINE_LENGTH		10
 
 
+
 /*  All structs  */
 
 typedef struct s_tex
@@ -111,6 +112,7 @@ typedef struct s_map
 	int			height;
 	t_door		*doors;
 	t_color		*colors;
+	t_tex		*ani[5];
 }				t_map;
 
 // typedef struct s_ray
@@ -129,6 +131,7 @@ typedef struct s_map
 // 	float		delta_dist_y;
 // 	float		final_distance;
 // }				t_ray;
+
 
 typedef struct s_cub3d
 {
@@ -160,7 +163,7 @@ int		player_in_doorway(t_cub3d *cub);
 void	draw_minimap(t_cub3d *cub);
 
 void	load_player(t_cub3d *cub);
-int		gun_shots(t_cub3d *cub, int flag);
+int		gun_shots(t_cub3d *cub);
 void	load_player_frame(t_cub3d *cub, int nb);
 // void	load_player_image(t_cub3d *cub, int nb);
 // void	load_player(t_cub3d *cub);
@@ -230,7 +233,7 @@ void	double_check(t_cub3d *cub, char **line, int count);
 /*  Rendering  */
 
 void	dda(t_cub3d *cub, float *xy);
-void	draw_wall_slice(t_cub3d *cub, int x, int wall_height, float ray_dist);
+void	draw_wall_slice(t_cub3d *cub, int x, int wall_height, float ray_dist, float curr_ang);
 
 void	render_map(t_cub3d *cub);
 void	render_map_2(t_cub3d *cub);
@@ -243,5 +246,9 @@ int		reset(int keycode, t_cub3d *cub);
 int		ft_moving(int keycode, t_cub3d *cub);
 void	is_walkable(t_cub3d *cub, float new_x, float new_y);
 void	my_mlx_pixel_put(t_cub3d *cub, float x, float y, int color);
+
+
+void	draw_gun(t_cub3d *cub, int index);
+
 
 #endif /* CUB3D_H */

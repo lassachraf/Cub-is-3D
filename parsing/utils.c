@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:06:19 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/09 15:44:38 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/18 10:04:05 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	double_check(t_cub3d *cub, char **line, int count)
 
 	i = 0;
 	if (count != 6)
-		ft_error(cub, "Error: no textures.");
+		ft_error(cub, "Error: missing texture.");
 	if (**line && *line && !is_white_line(*line))
 	{
 		while ((*line)[i] && ft_isspace((*line)[i]))

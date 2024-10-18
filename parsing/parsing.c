@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:55:30 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/11 14:53:50 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/18 11:24:00 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,5 @@ void	parsing(t_cub3d *cub, char *av)
 		ft_error(cub, "Error: allocation failed.");
 	get_file_content(cub);
 	close(cub->map->fd);
-	create_texture(&cub, 5, "textures/door.xpm");
+	create_texture(&cub, 5, "textures/Door.xpm");
 }

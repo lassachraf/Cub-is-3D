@@ -54,7 +54,7 @@ void	cast_fov(t_cub3d *cub)
 		int wall_bottom = wall_top + wall_height;
 		for (int y = 0; y < wall_top; y++)
 			my_mlx_pixel_put(cub, i, y, cub->map->colors->ceil_h);
-		draw_wall_slice(cub, i, wall_height, ray_dist);
+		draw_wall_slice(cub, i, wall_height, ray_dist, curr_ang);
 		for (int y = wall_bottom; y < cub->hov; y++)
 			my_mlx_pixel_put(cub, i, y, cub->map->colors->floor_h);
 	}
@@ -185,15 +185,14 @@ int	cub_loop(t_cub3d *cub)
 	cub->add = mlx_get_data_addr(cub->img, &cub->bpp, &cub->szl, &cub->end);
 	cast_fov(cub);
 	draw_minimap(cub);
-	load_player(cub);
-	// put_player(cub);
-	// if (cub->person == 1)
-	// {
-	// 	gun_shots(cub, 0);
-	// 	cub->person = 0;
-	// }
-	// else
-	// 	gun_shots(cub, 1);
+
+	if (cub->person == 0)
+		draw_gun(cub, 0);
+	else if (cub->person == 1)
+	{
+		gun_shots(cub);
+	}
+
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img, 0, 0);
 	return (0);
 }

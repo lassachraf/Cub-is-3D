@@ -85,12 +85,30 @@ void	load_textures(t_cub3d *cub)
 	t_tex	*n;
 	t_tex	*s;
 	t_tex	*d;
+	t_tex	*ani[5];
+
+	char *num;
+	char *str;
+
 
 	d = cub->door;
 	e = cub->map->east;
 	w = cub->map->west;
 	n = cub->map->north;
 	s = cub->map->south;
+
+
+	for (int i = 0; i < 5; i++)
+	{
+		ani[i] = cub->map->ani[i];
+		num = ft_itoa(i);
+		str = ft_strjoin("animation/ply-", num);
+		ani[i]->file = ft_strjoin(str, ".xpm");
+		ani[i]->img = mlx_xpm_file_to_image(cub->mlx, ani[i]->file , &ani[i]->width, &ani[i]->height);
+		ani[i]->add = mlx_get_data_addr(ani[i]->img, &ani[i]->bpp, &ani[i]->szl, &ani[i]->end);
+	}
+
+
 	d->img = mlx_xpm_file_to_image(cub->mlx, d->file, &d->width, &d->height);
 	e->img = mlx_xpm_file_to_image(cub->mlx, e->file, &e->width, &e->height);
 	w->img = mlx_xpm_file_to_image(cub->mlx, w->file, &w->width, &w->height);

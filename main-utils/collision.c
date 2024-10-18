@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 19:41:14 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/13 10:37:22 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/18 12:01:43 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_the_xs(t_cub3d *cub, float pt)
 	if (cub->map->map[(int)cub->player->y][(int)(pt + 5) / TILE_SIZE] != '1'
 		&& cub->map->map[(int)cub->player->y][(int)(pt - 5) / TILE_SIZE] != '1'
 		&& (cub->map->map[(int)cub->player->y][(int)(pt + 5) / TILE_SIZE] != 'D'
-		|| cub->oc_door == 1) // Check if the door is open
+		|| cub->oc_door == 1)
 		&& (cub->map->map[(int)cub->player->y][(int)(pt - 5) / TILE_SIZE] != 'D'
 		|| cub->oc_door == 1))
 		return (1);
