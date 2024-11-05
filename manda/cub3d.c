@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:06:54 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/27 15:04:37 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/26 16:40:48 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	cub3d(t_cub3d *cub)
+void	cub3d_bonus(t_cub3d *cub)
 {
 	cub->wov = 1920;
 	cub->hov = 1080;
@@ -27,7 +27,7 @@ void	cub3d(t_cub3d *cub)
 	mlx_loop(cub->mlx);
 }
 
-void	init_cub3d(char *av)
+void	init_cub3d_bonus(char *av)
 {
 	t_cub3d	*cub;
 
@@ -35,14 +35,14 @@ void	init_cub3d(char *av)
 	if (cub == NULL)
 		ft_error(NULL, "Error.");
 	parsing(cub, av);
-	cub3d(cub);
+	cub3d_bonus(cub);
 	general_free(cub);
 }
 
 int	main(int ac, char **av)
 {
 	if (ac != 2)
-		return (ft_error(NULL, "Error."), 1);
-	init_cub3d(av[1]);
+		return (ft_error(NULL, "Error: invalid number of args."), 1);
+	init_cub3d_bonus(av[1]);
 	return (1);
 }

@@ -61,14 +61,11 @@ PARSING_B	:=	bonus/parsing/colors_bonus.c				\
 				bonus/parsing/utils_bonus.c
 
 # This is mandatory execution.
-EXECUTING	:=	manda/executing/animation_utils.c			\
-				manda/executing/animation.c					\
-				manda/executing/collision.c					\
-				manda/executing/cub_loop.c					\
+EXECUTING	:=	manda/executing/cub_loop.c					\
 				manda/executing/dda_and_wall_draw.c			\
 				manda/executing/hooking.c					\
-				manda/executing/minimap.c					\
-				manda/executing/ray_distance.c
+				manda/executing/ray_distance.c				\
+				manda/executing/wall.c
 				
 # This is bonus execution.
 EXECUTING_B	:=	bonus/executing/animation_bonus.c			\

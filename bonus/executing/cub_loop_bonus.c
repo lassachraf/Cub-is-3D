@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:35:57 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/27 14:06:00 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/30 15:51:56 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,11 @@ int	cub_loop(t_cub3d *cub)
 	if (cub->img)
 		mlx_destroy_image(cub->mlx, cub->img);
 	cub->img = mlx_new_image(cub->mlx, cub->wov, cub->hov);
+	if (cub->img == NULL)
+		ft_error(cub, "Error.");
 	cub->add = mlx_get_data_addr(cub->img, &cub->bpp, &cub->szl, &cub->end);
+	if (cub->add == NULL)
+		ft_error(cub, "Error.");
 	cast_fov(cub);
 	draw_minimap(cub);
 	if (cub->info_gun.is_focus == 0 && cub->info_gun.is_reload == 0

@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 12:32:20 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/27 14:22:41 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/27 14:37:35 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,6 @@ void	free_map_element(t_cub3d *cub)
 
 void	free_cub_element(t_cub3d *cub)
 {
-	if (cub->fstp)
-		free_texture(cub, cub->fstp);
-	if (cub->door)
-		free_texture(cub, cub->door);
 	if (cub->player)
 		free(cub->player);
 	if (cub->img)

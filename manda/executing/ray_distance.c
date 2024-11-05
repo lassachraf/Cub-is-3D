@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_distance.c                                     :+:      :+:    :+:   */
+/*   ray_distance_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 19:23:15 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/27 15:45:19 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/27 14:05:40 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void	set_texture_side(t_cub3d *cub, t_ray *ray)
 {
 	if (ray->side == 0)
 		ray->fl_dist = (ray->map_x - cub->player->x + (1 - ray->step_x) / 2)
-			/ ray->ray_x - 0.3;
+			/ ray->ray_x;
 	else
 		ray->fl_dist = (ray->map_y - cub->player->y + (1 - ray->step_y) / 2)
-			/ ray->ray_y - 0.3;
+			/ ray->ray_y;
 	if (ray->side == 0)
 	{
 		if (ray->step_x < 0)

@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:20:27 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/27 14:58:16 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/30 15:50:22 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,37 +32,8 @@ void	create_texture(t_cub3d **cub, int type, char *file)
 		add_texture(*cub, &(*cub)->map->east, file);
 	else if (type == 4 && !(*cub)->map->west)
 		add_texture(*cub, &(*cub)->map->west, file);
-	else if (type == 5 && !(*cub)->door)
-		add_texture(*cub, &(*cub)->door, file);
 	else
-		ft_error(*cub, "Error: duplicated texture.");
-}
-
-void	load_animation_textures(t_cub3d *cub)
-{
-	int		i;
-	char	*num;
-	char	*str;
-	t_tex	*ani[73];
-
-	i = -1;
-	while (++i < 73)
-	{
-		ani[i] = cub->map->ani[i];
-		num = ft_itoa(i);
-		str = ft_strjoin("animation/", num);
-		free(num);
-		ani[i]->file = ft_strjoin(str, ".xpm");
-		free(str);
-		ani[i]->img = mlx_xpm_file_to_image(cub->mlx, ani[i]->file,
-				&ani[i]->width, &ani[i]->height);
-		if (ani[i]->img == NULL)
-			ft_error(cub, "Error: can't load texture.");
-		ani[i]->add = mlx_get_data_addr(ani[i]->img, &ani[i]->bpp,
-				&ani[i]->szl, &ani[i]->end);
-		if (ani[i]->add == NULL)
-			ft_error(cub, "Error: can't load texture.");
-	}
+		ft_error(*cub, "Error.");
 }
 
 void	load_textures(t_cub3d *cub)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dda_and_wall_draw.c                                :+:      :+:    :+:   */
+/*   dda_and_wall_draw_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 23:17:18 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/27 14:24:21 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/27 14:05:55 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ void	set_textures(t_cub3d *cub, t_tex **tex)
 		*tex = cub->map->west;
 	if (cub->side == 3)
 		*tex = cub->map->east;
-	if (cub->side == 4)
-		*tex = cub->door;
 }
 
 void	init_wall(t_cub3d *cub, t_ray ray, t_wall *wall)

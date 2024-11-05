@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:23:12 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/27 14:12:32 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/27 13:03:43 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 /*  Headers  */
 
@@ -98,7 +98,6 @@ typedef struct s_map
 	int			width;
 	t_tex		*west;
 	t_tex		*east;
-	int			door_c;
 	t_tex		*north;
 	t_tex		*south;
 	int			height;
@@ -174,12 +173,7 @@ typedef struct s_cub3d
 	void		*add;
 	t_map		*map;
 	t_tex		*gun;
-	t_tex		*door;
-	t_tex		*fstp;
-	int			oc_door;
 	t_player	*player;
-	t_gun		info_gun;
-	int			gun_shots;
 }					t_cub3d;
 
 /*  All prototypes  */
@@ -220,7 +214,7 @@ void	draw_minimap(t_cub3d *cub);
 
 float	calculate_ray_distance(t_cub3d *cub, t_ray *ray);
 
-int		check_collision(t_cub3d *cub, float new_x, float new_y);
+int		check_wall(t_cub3d *cub, float new_x, float new_y);
 
 // int		gun_shots(t_cub3d *cub);
 

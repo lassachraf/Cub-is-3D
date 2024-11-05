@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooking.c                                          :+:      :+:    :+:   */
+/*   hooking_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 18:19:14 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/27 16:07:42 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/10/27 14:05:50 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	is_walkable(t_cub3d *cub, float new_x, float new_y)
+void is_walkable(t_cub3d *cub, float new_x, float new_y)
 {
-	float	x;
-	float	y;
-
-	x = (cub->player->x + new_x);
-	y = (cub->player->y + new_y);
-	if ((int)x >= 0 && (int)x < cub->map->width
-		&& (int)y >= 0 && (int)y < cub->map->height)
+    if (check_wall(cub, new_x, new_y))
 	{
-		if (cub->map->map[(int)y][(int)x] != '1')
-		{
-			cub->player->x = x;
-			cub->player->y = y;
-		}
-	}
+        cub->player->x += new_x / TILE_SIZE;
+		cub->player->y += new_y / TILE_SIZE;
+    } 
 }
 
 void	update(t_cub3d *cub)
@@ -38,6 +29,8 @@ void	update(t_cub3d *cub)
 	float	movestep;
 
 	angle = 0;
+	x_step = 0;
+	y_step = 0;
 	if (cub->player->walkdirection)
 	{
 		movestep = cub->player->walkdirection * cub->player->movespeed;
@@ -90,6 +83,5 @@ int	ft_moving(int keycode, t_cub3d *cub)
 		ft_exit(cub);
 	else
 		key_hooks(keycode, cub);
-	update(cub);
 	return (0);
 }
