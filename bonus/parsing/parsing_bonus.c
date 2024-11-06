@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:55:30 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/26 16:16:11 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/06 01:05:37 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	parsing(t_cub3d *cub, char *av)
 		ft_error(cub, "Error.");
 	get_file_content(cub);
 	close(cub->map->fd);
-	create_texture(&cub, 5, "textures/door1.xpm");
+	create_texture(&cub, 5, "textures/wood.xpm");
 	i = -1;
 	while (++i < 73)
 	{

@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 18:19:14 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/27 14:05:50 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/06 00:50:53 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,17 @@ void	update(t_cub3d *cub)
 
 void	key_hooks(int keycode, t_cub3d *cub)
 {
-	if (keycode == 123)
+	if (keycode == LEFT_ARROW)
 		cub->player->turndirection = -1;
-	else if (keycode == 124)
+	else if (keycode == RIGHT_ARROW)
 		cub->player->turndirection = 1;
-	else if (keycode == 13)
+	else if (keycode == W_KEY)
 		cub->player->walkdirection = 1;
-	else if (keycode == 1)
+	else if (keycode == S_KEY)
 		cub->player->walkdirection = -1;
-	else if (keycode == 0)
+	else if (keycode == A_KEY)
 		cub->player->sidedirection = -1;
-	else if (keycode == 2)
+	else if (keycode == D_KEY)
 		cub->player->sidedirection = 1;
 	else if (keycode == 31 && cub->oc_door == 0)
 		cub->oc_door = 1;
@@ -79,18 +79,18 @@ void	key_hooks(int keycode, t_cub3d *cub)
 
 int	ft_reset(int keycode, t_cub3d *cub)
 {
-	if (keycode == 123 || keycode == 124)
+	if (keycode == LEFT_ARROW || keycode == RIGHT_ARROW)
 		cub->player->turndirection = 0;
-	else if (keycode == 13 || keycode == 1)
+	else if (keycode == W_KEY || keycode == S_KEY)
 		cub->player->walkdirection = 0;
-	else if (keycode == 0 || keycode == 2)
+	else if (keycode == D_KEY || keycode == A_KEY)
 		cub->player->sidedirection = 0;
 	return (0);
 }
 
 int	ft_moving(int keycode, t_cub3d *cub)
 {
-	if (keycode == 53)
+	if (keycode == ESC_KEY)
 		ft_exit(cub);
 	else
 		key_hooks(keycode, cub);

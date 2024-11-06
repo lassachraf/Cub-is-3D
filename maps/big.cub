@@ -1,14 +1,14 @@
 F 31,99,112            
 
-SO textures/lemon.xpm      
+SO textures/greystone.xpm      
 
 
 C 17,16,38                
 
-NO textures/blue.xpm
-WE textures/herbs.xpm
+NO textures/bluestone.xpm
+WE textures/eagle.xpm
 
-EA textures/grey.xpm
+EA textures/redbrick.xpm
 
 
 

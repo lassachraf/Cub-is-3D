@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dda_and_wall_draw_bonus.c                          :+:      :+:    :+:   */
+/*   dda_and_wall_draw.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 23:17:18 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/27 14:05:55 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/06 01:18:48 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,14 @@ void	draw_wall_slice(t_cub3d *cub, t_ray ray, int x)
 
 	init_wall(cub, ray, &wall);
 	set_textures(cub, &texture);
-	wall.tex_x = wall.wall_x * texture->width;
-	if (cub->side == 0 && ray.ray_x > 0)
+	wall.tex_x = wall.wall_x * (double)texture->width;
+	if (cub->side == 0 && ray.ray_y < 0)
 		wall.tex_x = texture->width - wall.tex_x - 1;
-	if (cub->side == 1 && ray.ray_y < 0)
+	else if (cub->side == 1 && ray.ray_y > 0)
+		wall.tex_x = texture->width - wall.tex_x - 1;
+	else if (cub->side == 2 && ray.ray_x < 0)
+		wall.tex_x = texture->width - wall.tex_x - 1;
+	else if (cub->side == 3 && ray.ray_x > 0)
 		wall.tex_x = texture->width - wall.tex_x - 1;
 	i = wall.start - 1;
 	while (++i < wall.end)
