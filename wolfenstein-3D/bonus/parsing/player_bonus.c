@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player.c                                           :+:      :+:    :+:   */
+/*   player_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:34:39 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/27 13:01:33 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:21:31 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	alloc_and_set(t_cub3d *cub)
 {
 	cub->player = calloc(1, sizeof(t_player));
 	if (cub->player == NULL)
-		ft_error(cub, "Error: allocation failed.");
+		ft_error(cub, "Error.");
 	cub->player->fov = deg_to_rad(60);
-	cub->player->movespeed = 5;
+	cub->player->movespeed = 6;
 	cub->player->rotationspeed = 3 * (PI / 180);
 }
 

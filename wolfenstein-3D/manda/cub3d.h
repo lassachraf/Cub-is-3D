@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:23:12 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/27 13:03:43 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:59:57 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_BONUS_H
-# define CUB3D_BONUS_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
 /*  Headers  */
 
 # include "../libs/get-next-line/get_next_line.h"
 # include "../libs/libft/libft.h"
-# include "../libs/mlx/mlx.h"
+# include "../../mlx/mlx.h"
 # include <string.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -31,27 +31,15 @@
 # define RESET			"\033[0m"
 # define TILE_SIZE		32
 
-# define ESC_KEY		65307
+# define ESC_KEY		53
 
-# define LEFT_ARROW		65361
-# define RIGHT_ARROW	65363
+# define LEFT_ARROW		123
+# define RIGHT_ARROW	124
 
-# define A_KEY			97
-# define W_KEY			119
-# define D_KEY			100
-# define S_KEY			115
-
-# define C_KEY			99
-# define O_KEY			111
-
-# define G_KEY			103
-# define R_KEY			114
-// # define V_KEY			114
-// # define F_KEY			114
-
-# define MINIMAP_SCALE	0.2
-# define PLAYER_RADIUS	3
-# define LINE_LENGTH	10
+# define A_KEY			0
+# define W_KEY			13
+# define D_KEY			2
+# define S_KEY			1
 
 /*  All structs  */
 
@@ -98,7 +86,6 @@ typedef struct s_map
 	int			width;
 	t_tex		*west;
 	t_tex		*east;
-	int			door_c;
 	t_tex		*north;
 	t_tex		*south;
 	int			height;
@@ -174,12 +161,7 @@ typedef struct s_cub3d
 	void		*add;
 	t_map		*map;
 	t_tex		*gun;
-	t_tex		*door;
-	t_tex		*fstp;
-	int			oc_door;
 	t_player	*player;
-	t_gun		info_gun;
-	int			gun_shots;
 }					t_cub3d;
 
 /*  All prototypes  */
@@ -188,23 +170,7 @@ typedef struct s_cub3d
 
 char	*get_next_line(int fd);
 
-void	free_double(char **s);
-void	general_free(t_cub3d *cub);
-void	free_map_element(t_cub3d *cub);
-void	free_cub_element(t_cub3d *cub);
-void	free_texture(t_cub3d *cub, t_tex *tex);
-
 /*  Executing  */
-
-int		gun_shots(t_cub3d *cub);
-void	gun_focus(t_cub3d *cub);
-void	reload_gun(t_cub3d *cub);
-void	focus_shoot(t_cub3d *cub);
-void	gun_default_view(t_cub3d *cub);
-
-void	load_player(t_cub3d *cub);
-void	default_shoot(t_cub3d *cub);
-void	draw_gun(t_cub3d *cub, int index);
 
 void	cast_fov(t_cub3d *cub);
 int		cub_loop(t_cub3d *cub);
@@ -213,20 +179,13 @@ void	dda(t_cub3d *cub, float *xy);
 void	draw_wall_slice(t_cub3d *cub, t_ray ray, int x);
 void	my_mlx_pixel_put(t_cub3d *cub, float x, float y, int color);
 
+void	update(t_cub3d *cub);
 int		ft_reset(int keycode, t_cub3d *cub);
 int		ft_moving(int keycode, t_cub3d *cub);
 
-void	draw_minimap(t_cub3d *cub);
-
 float	calculate_ray_distance(t_cub3d *cub, t_ray *ray);
 
-int		check_collision(t_cub3d *cub, float new_x, float new_y);
-
-// int		gun_shots(t_cub3d *cub);
-
-/*  Should be deleted after  */
-
-void	update(t_cub3d *cub);
+int		check_wall(t_cub3d *cub, float new_x, float new_y);
 
 /*  Parsing  */
 
@@ -243,28 +202,18 @@ char	*free_and_join(char **line, char **lines, int fd);
 char	*ft_strncpy_2(char *dest, char *src, unsigned int n);
 
 void	get_2d_map(t_cub3d *cub, char *line);
-void	map_parsing(t_cub3d **cub, char **map);
-void	check_surrounded(t_cub3d *cub, char **map);
-void	alloc_and_fill_map(t_cub3d **cub, char **map);
-void	general_check(t_cub3d *cub, char **map, int *i, int *j);
 
 float	deg_to_rad(int angle);
 float	normalize_angle(float angle);
 
-void	get_file_content(t_cub3d *cub);
 void	parsing(t_cub3d *cub, char *av);
-void	get_textures_and_colors(t_cub3d *cub, char **line);
-void	compare_and_set(t_cub3d **cub, char **s, int *count);
-int		check_texture_color(t_cub3d **cub, char *line, int *count);
 
 float	get_angle(char c);
 int		is_it_player(char c);
 void	get_player(t_cub3d *cub);
 void	alloc_and_set(t_cub3d *cub);
-int		player_in_doorway(t_cub3d *cub);
 
 void	load_textures(t_cub3d *cub);
-void	load_animation_textures(t_cub3d *cub);
 int		get_texture_color(t_tex *texture, int x, int y);
 void	add_texture(t_cub3d *cub, t_tex **tex, char *name);
 void	create_texture(t_cub3d **cub, int type, char *file);
@@ -274,5 +223,13 @@ int		is_white_line(char *s);
 void	skip_whitespaces(char **line);
 void	ft_error(t_cub3d *cub, char *msg);
 void	double_check(t_cub3d *cub, char **line, int count);
+
+/*  Free Memory  */
+
+void	free_double(char **s);
+void	general_free(t_cub3d *cub);
+void	free_map_element(t_cub3d *cub);
+void	free_cub_element(t_cub3d *cub);
+void	free_texture(t_cub3d *cub, t_tex *tex);
 
 #endif /* CUB3D_H */

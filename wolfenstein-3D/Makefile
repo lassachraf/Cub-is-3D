@@ -6,7 +6,7 @@
 #    By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 16:20:15 by alassiqu          #+#    #+#              #
-#    Updated: 2024/11/06 00:51:38 by alassiqu         ###   ########.fr        #
+#    Updated: 2024/11/06 14:03:37 by alassiqu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC			:=	cc
 CFLAGS		:=	-Wall -Wextra -Werror #-Ofast -fsanitize=address -g3
 
 LXFLAGS		:=	-I /usr/local/include -L /usr/local/lib -lmlx -lXext -lX11 -lm
-MCFLAGS		:=	-L libs/mlx -lmlx -framework OpenGL -framework AppKit
+MCFLAGS		:=	-L ../mlx -lmlx -framework OpenGL -framework AppKit
 
 RM			:=	rm -f
 
@@ -133,14 +133,14 @@ $(LIBFT):
 
 $(NAME)	:	$(LIBFT) $(OBJS)
 	@echo "$(RED)** Linking. **$(YELLOW)"
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LXFLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MCFLAGS) -o $(NAME)
 	@printf "$(UCYAN)"
 	@printf $(ASCII_ART_M)
 	@echo "$(RED)** Manda Cub is waiting ! **$(RESET)"
 
 $(BONUS)	:	$(LIBFT) $(OBJS_B)
 	@echo "$(RED)** Linking. **$(YELLOW)"
-	$(CC) $(CFLAGS) $(OBJS_B) $(LIBFT) $(LXFLAGS) -o $(BONUS)
+	$(CC) $(CFLAGS) $(OBJS_B) $(LIBFT) $(MCFLAGS) -o $(BONUS)
 	@printf "$(UCYAN)"
 	@printf $(ASCII_ART_B)
 	@echo "$(RED)** Bonus Cub is waiting ! **$(RESET)"

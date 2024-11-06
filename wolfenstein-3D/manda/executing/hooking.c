@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hooking_bonus.c                                    :+:      :+:    :+:   */
+/*   hooking.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 18:19:14 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/11/06 00:50:53 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:13:04 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d_bonus.h"
+#include "../cub3d.h"
 
 void	is_walkable(t_cub3d *cub, float new_x, float new_y)
 {
-	if (check_collision(cub, new_x, 0))
+	if (check_wall(cub, new_x, new_y))
+	{
 		cub->player->x += new_x / TILE_SIZE;
-	if (check_collision(cub, 0, new_y))
 		cub->player->y += new_y / TILE_SIZE;
+	}
 }
 
 void	update(t_cub3d *cub)
@@ -63,18 +64,6 @@ void	key_hooks(int keycode, t_cub3d *cub)
 		cub->player->sidedirection = -1;
 	else if (keycode == D_KEY)
 		cub->player->sidedirection = 1;
-	else if (keycode == 31 && cub->oc_door == 0)
-		cub->oc_door = 1;
-	else if (keycode == 8 && cub->oc_door == 1 && !player_in_doorway(cub))
-		cub->oc_door = 0;
-	else if (keycode == 5)
-		cub->info_gun.is_shoot = 1;
-	else if (keycode == 15)
-		cub->info_gun.is_reload = 1;
-	else if (keycode == 3)
-		cub->info_gun.is_focus = 1;
-	else if (keycode == 9)
-		cub->info_gun.is_focus = 0;
 }
 
 int	ft_reset(int keycode, t_cub3d *cub)
@@ -94,6 +83,5 @@ int	ft_moving(int keycode, t_cub3d *cub)
 		ft_exit(cub);
 	else
 		key_hooks(keycode, cub);
-	update(cub);
 	return (0);
 }

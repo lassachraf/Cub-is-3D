@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub_loop_bonus.c                                   :+:      :+:    :+:   */
+/*   cub_loop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:35:57 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/30 15:51:56 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/06 12:56:15 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d_bonus.h"
+#include "../cub3d.h"
 
 float	get_current_angle(float ray_start, float ang_inc, int x)
 {
@@ -26,7 +26,7 @@ float	*get_index(t_cub3d *cub, float curr_ang, float ray_dist)
 
 	ray = malloc(2 * sizeof(float));
 	if (ray == NULL)
-		ft_error(cub, "Error: allocation failed.");
+		ft_error(cub, "Error.");
 	ray[0] = cub->player->x + cos(curr_ang) * ray_dist;
 	ray[1] = cub->player->y + sin(curr_ang) * ray_dist;
 	return (ray);
@@ -77,23 +77,8 @@ int	cub_loop(t_cub3d *cub)
 	if (cub->img)
 		mlx_destroy_image(cub->mlx, cub->img);
 	cub->img = mlx_new_image(cub->mlx, cub->wov, cub->hov);
-	if (cub->img == NULL)
-		ft_error(cub, "Error.");
 	cub->add = mlx_get_data_addr(cub->img, &cub->bpp, &cub->szl, &cub->end);
-	if (cub->add == NULL)
-		ft_error(cub, "Error.");
 	cast_fov(cub);
-	draw_minimap(cub);
-	if (cub->info_gun.is_focus == 0 && cub->info_gun.is_reload == 0
-		&& cub->info_gun.is_shoot == 0)
-		gun_default_view(cub);
-	else if (cub->info_gun.is_focus == 1 && cub->info_gun.is_reload == 0
-		&& cub->info_gun.is_shoot == 0)
-		gun_focus(cub);
-	if (cub->info_gun.is_reload == 1)
-		reload_gun(cub);
-	else if (cub->info_gun.is_shoot == 1)
-		gun_shots(cub);
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img, 0, 0);
 	return (0);
 }

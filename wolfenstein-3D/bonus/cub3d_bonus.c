@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:06:54 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/26 16:40:48 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:19:27 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	ft_mouse(int x, int y, t_cub3d *cub)
 
 void	cub3d_bonus(t_cub3d *cub)
 {
-	cub->wov = 1920;
-	cub->hov = 1080;
+	cub->wov = 2300;
+	cub->hov = 1300;
 	cub->mlx = mlx_init();
 	cub->win = mlx_new_window(cub->mlx, cub->wov, cub->hov, "Cub-is-DDD !");
 	cub->img = mlx_new_image(cub->mlx, cub->wov, cub->hov);
@@ -70,7 +70,7 @@ void	init_cub3d_bonus(char *av)
 int	main(int ac, char **av)
 {
 	if (ac != 2)
-		return (ft_error(NULL, "Error: invalid number of args."), 1);
+		return (ft_error(NULL, "Error."), 1);
 	init_cub3d_bonus(av[1]);
 	return (1);
 }

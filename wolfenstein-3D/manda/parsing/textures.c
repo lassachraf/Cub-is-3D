@@ -6,17 +6,17 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:20:27 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/26 16:09:20 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/06 12:56:47 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d_bonus.h"
+#include "../cub3d.h"
 
 void	add_texture(t_cub3d *cub, t_tex **tex, char *name)
 {
 	*tex = ft_calloc(1, sizeof(t_tex));
 	if (*tex == NULL)
-		ft_error(cub, "Error: allocation failed.");
+		ft_error(cub, "Error.");
 	if (name[ft_strlen(name) - 1] == '\n')
 		name[ft_strlen(name) - 1] = '\0';
 	(*tex)->file = ft_strdup(name);
@@ -32,37 +32,8 @@ void	create_texture(t_cub3d **cub, int type, char *file)
 		add_texture(*cub, &(*cub)->map->east, file);
 	else if (type == 4 && !(*cub)->map->west)
 		add_texture(*cub, &(*cub)->map->west, file);
-	else if (type == 5 && !(*cub)->door)
-		add_texture(*cub, &(*cub)->door, file);
 	else
-		ft_error(*cub, "Error: duplicated texture.");
-}
-
-void	load_animation_textures(t_cub3d *cub)
-{
-	int		i;
-	char	*num;
-	char	*str;
-	t_tex	*ani[73];
-
-	i = -1;
-	while (++i < 73)
-	{
-		ani[i] = cub->map->ani[i];
-		num = ft_itoa(i);
-		str = ft_strjoin("animation/", num);
-		free(num);
-		ani[i]->file = ft_strjoin(str, ".xpm");
-		free(str);
-		ani[i]->img = mlx_xpm_file_to_image(cub->mlx, ani[i]->file,
-				&ani[i]->width, &ani[i]->height);
-		if (ani[i]->img == NULL)
-			ft_error(cub, "Error: can't load texture.");
-		ani[i]->add = mlx_get_data_addr(ani[i]->img, &ani[i]->bpp,
-				&ani[i]->szl, &ani[i]->end);
-		if (ani[i]->add == NULL)
-			ft_error(cub, "Error: can't load texture.");
-	}
+		ft_error(*cub, "Error.");
 }
 
 void	load_textures(t_cub3d *cub)
@@ -71,27 +42,23 @@ void	load_textures(t_cub3d *cub)
 	t_tex	*w;
 	t_tex	*n;
 	t_tex	*s;
-	t_tex	*d;
 
-	d = cub->door;
 	e = cub->map->east;
 	w = cub->map->west;
 	n = cub->map->north;
 	s = cub->map->south;
-	d->img = mlx_xpm_file_to_image(cub->mlx, d->file, &d->width, &d->height);
 	e->img = mlx_xpm_file_to_image(cub->mlx, e->file, &e->width, &e->height);
 	w->img = mlx_xpm_file_to_image(cub->mlx, w->file, &w->width, &w->height);
 	n->img = mlx_xpm_file_to_image(cub->mlx, n->file, &n->width, &n->height);
 	s->img = mlx_xpm_file_to_image(cub->mlx, s->file, &s->width, &s->height);
-	if (!d->img || !e->img || !w->img || !n->img || !s->img)
-		ft_error(cub, "Error: can't load texture.");
-	d->add = mlx_get_data_addr(d->img, &d->bpp, &d->szl, &d->end);
+	if (!e->img || !w->img || !n->img || !s->img)
+		ft_error(cub, "Error.");
 	e->add = mlx_get_data_addr(e->img, &e->bpp, &e->szl, &e->end);
 	w->add = mlx_get_data_addr(w->img, &w->bpp, &w->szl, &w->end);
 	n->add = mlx_get_data_addr(n->img, &n->bpp, &n->szl, &n->end);
 	s->add = mlx_get_data_addr(s->img, &s->bpp, &s->szl, &s->end);
-	if (!d->add || !e->add || !w->add || !n->add || !s->add)
-		ft_error(cub, "Error: can't load texture.");
+	if (!e->add || !w->add || !n->add || !s->add)
+		ft_error(cub, "Error.");
 }
 
 int	get_texture_color(t_tex *texture, int x, int y)

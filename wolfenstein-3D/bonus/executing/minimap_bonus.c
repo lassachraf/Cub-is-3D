@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 18:49:15 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/27 14:05:45 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:20:27 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ void	draw_minimap(t_cub3d *cub)
 	int			map_x;
 	int			map_y;
 
-	mini.max_map_size = cub->map->height;
+	mini.max_map_size = cub->map->height - 1;
 	if (cub->map->width > cub->map->height)
 		mini.max_map_size = cub->map->width;
-	mini.max_mini_size = cub->wov / 4 - 20;
+	mini.max_mini_size = cub->wov / 6 - 20;
 	mini.tile_size = mini.max_mini_size / mini.max_map_size;
 	if (mini.tile_size < 4)
 		mini.tile_size = 4;
