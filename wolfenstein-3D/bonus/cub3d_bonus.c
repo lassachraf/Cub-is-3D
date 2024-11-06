@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:06:54 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/11/06 15:07:04 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/06 23:15:02 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ void	cub3d_bonus(t_cub3d *cub)
 	cub->add = mlx_get_data_addr(cub->img, &cub->bpp, &cub->szl, &cub->end);
 	if (cub->add == NULL)
 		ft_error(cub, "Error.");
+	load_textures(cub);
+	load_animation_textures(cub);
 	cub->info_gun.state_hand = 0;
 	cub->info_gun.is_focus = 0;
 	cub->info_gun.is_animation_run = 0;
-	load_textures(cub);
-	load_animation_textures(cub);
 	mlx_loop_hook(cub->mlx, cub_loop, cub);
 	mlx_hook(cub->win, 6, 1L << 6, ft_mouse, cub);
 	mlx_hook(cub->win, 2, 1L << 0, ft_moving, cub);

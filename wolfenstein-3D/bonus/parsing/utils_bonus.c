@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:06:19 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/26 16:12:49 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/06 23:08:52 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,17 @@ void	double_check(t_cub3d *cub, char **line, int count)
 
 void	ft_error(t_cub3d *cub, char *msg)
 {
+	int	i;
+
+	if (cub->map->ani[0])
+	{
+		i = -1;
+		while (++i < 73)
+		{
+			if (cub->map->ani[i])
+				free(cub->map->ani[i]);
+		}
+	}
 	general_free(cub);
 	printf(RED"%s\n"RESET, msg);
 	exit(1);

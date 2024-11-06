@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 15:51:44 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/26 16:11:31 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/06 22:51:21 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ void	ft_extension(char *mapfile, char *ext)
 {
 	if (!access(mapfile, F_OK))
 	{
-		if (!ft_strncmp(&mapfile[ft_strlen(mapfile) - 4], ext, 5)
-			&& ft_strlen(mapfile) > 4)
+		if (!ft_strncmp(&mapfile[ft_strlen(mapfile) - 4], ext, 5))
 			return ;
 		else
 			ft_error(NULL, "Error.");
