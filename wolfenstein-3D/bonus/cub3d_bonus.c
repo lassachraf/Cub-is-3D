@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:06:54 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/11/06 14:19:27 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/06 15:07:04 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,14 @@ void	cub3d_bonus(t_cub3d *cub)
 	cub->hov = 1300;
 	cub->mlx = mlx_init();
 	cub->win = mlx_new_window(cub->mlx, cub->wov, cub->hov, "Cub-is-DDD !");
+	if (cub->win == NULL)
+		ft_error(cub, "Error.");
 	cub->img = mlx_new_image(cub->mlx, cub->wov, cub->hov);
+	if (cub->img == NULL)
+		ft_error(cub, "Error.");
 	cub->add = mlx_get_data_addr(cub->img, &cub->bpp, &cub->szl, &cub->end);
+	if (cub->add == NULL)
+		ft_error(cub, "Error.");
 	cub->info_gun.state_hand = 0;
 	cub->info_gun.is_focus = 0;
 	cub->info_gun.is_animation_run = 0;

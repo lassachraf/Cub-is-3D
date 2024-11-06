@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:06:54 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/11/06 01:17:44 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/06 15:07:24 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,18 @@
 
 void	cub3d(t_cub3d *cub)
 {
-	cub->wov = 1920;
-	cub->hov = 1080;
+	cub->wov = 2300;
+	cub->hov = 1300;
 	cub->mlx = mlx_init();
 	cub->win = mlx_new_window(cub->mlx, cub->wov, cub->hov, "Cub-is-DDD !");
+	if (cub->win == NULL)
+		ft_error(cub, "Error.");
 	cub->img = mlx_new_image(cub->mlx, cub->wov, cub->hov);
+	if (cub->img == NULL)
+		ft_error(cub, "Error.");
 	cub->add = mlx_get_data_addr(cub->img, &cub->bpp, &cub->szl, &cub->end);
+	if (cub->add == NULL)
+		ft_error(cub, "Error.");
 	load_textures(cub);
 	mlx_loop_hook(cub->mlx, cub_loop, cub);
 	mlx_hook(cub->win, 2, 1L << 0, ft_moving, cub);

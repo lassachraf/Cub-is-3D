@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:55:30 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/11/06 12:10:19 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/06 15:14:17 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	parsing(t_cub3d *cub, char *av)
 	if (cub->map->fd == -1)
 		ft_error(cub, "Error.");
 	get_file_content(cub);
-	close(cub->map->fd);
 	create_texture(&cub, 5, "textures/door-wolfenstein.xpm");
 	i = -1;
 	while (++i < 73)
