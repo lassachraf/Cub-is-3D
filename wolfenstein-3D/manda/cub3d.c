@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:06:54 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/11/06 23:14:46 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/11 21:20:27 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	cub3d(t_cub3d *cub)
 	mlx_loop_hook(cub->mlx, cub_loop, cub);
 	mlx_hook(cub->win, 2, 1L << 0, ft_moving, cub);
 	mlx_hook(cub->win, 3, 1L << 1, ft_reset, cub);
+	mlx_hook(cub->win, 17, 0, ft_exit, cub);
 	mlx_loop(cub->mlx);
 }
 

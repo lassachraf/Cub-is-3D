@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:06:19 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/11/06 23:08:52 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/11 21:22:02 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_error(t_cub3d *cub, char *msg)
 {
 	int	i;
 
-	if (cub->map->ani[0])
+	if (cub && cub->map && cub->map->ani[0])
 	{
 		i = -1;
 		while (++i < 73)

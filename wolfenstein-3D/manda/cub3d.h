@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:23:12 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/11/11 18:19:25 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/11 18:26:05 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ typedef struct s_map
 	int			height;
 	t_color		*colors;
 }				t_map;
-
 
 typedef struct s_wall
 {
