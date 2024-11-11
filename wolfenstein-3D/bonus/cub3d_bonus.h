@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:23:12 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/11/06 14:10:58 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/11 17:28:20 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,7 +198,6 @@ void	draw_gun(t_cub3d *cub, int index);
 void	cast_fov(t_cub3d *cub);
 int		cub_loop(t_cub3d *cub);
 
-void	dda(t_cub3d *cub, float *xy);
 void	draw_wall_slice(t_cub3d *cub, t_ray ray, int x);
 void	my_mlx_pixel_put(t_cub3d *cub, float x, float y, int color);
 
