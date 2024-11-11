@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:23:12 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/11/06 13:59:57 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/11 18:19:25 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,17 +90,8 @@ typedef struct s_map
 	t_tex		*south;
 	int			height;
 	t_color		*colors;
-	t_tex		*ani[73];
 }				t_map;
 
-typedef struct s_minimap
-{
-	int			color;
-	int			tile_size;
-	int			max_map_size;
-	int			player_radius;
-	int			max_mini_size;
-}					t_minimap;
 
 typedef struct s_wall
 {
@@ -138,15 +129,6 @@ typedef struct s_ray
 	float		ray_start;
 }				t_ray;
 
-typedef struct s_gun
-{
-	int			is_shoot;
-	int			is_focus;
-	int			is_reload;
-	int			state_hand;
-	int			is_animation_run;
-}					t_gun;
-
 typedef struct s_cub3d
 {
 	int			bpp;
@@ -160,7 +142,6 @@ typedef struct s_cub3d
 	void		*img;
 	void		*add;
 	t_map		*map;
-	t_tex		*gun;
 	t_player	*player;
 }					t_cub3d;
 
@@ -175,7 +156,6 @@ char	*get_next_line(int fd);
 void	cast_fov(t_cub3d *cub);
 int		cub_loop(t_cub3d *cub);
 
-void	dda(t_cub3d *cub, float *xy);
 void	draw_wall_slice(t_cub3d *cub, t_ray ray, int x);
 void	my_mlx_pixel_put(t_cub3d *cub, float x, float y, int color);
 

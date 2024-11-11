@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:35:57 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/11/06 15:05:02 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/11 17:56:28 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,6 @@ float	get_current_angle(float ray_start, float ang_inc, int x)
 
 	angle = ray_start + (x * ang_inc);
 	return (normalize_angle(angle));
-}
-
-float	*get_index(t_cub3d *cub, float curr_ang, float ray_dist)
-{
-	float	*ray;
-
-	ray = malloc(2 * sizeof(float));
-	if (ray == NULL)
-		ft_error(cub, "Error.");
-	ray[0] = cub->player->x + cos(curr_ang) * ray_dist;
-	ray[1] = cub->player->y + sin(curr_ang) * ray_dist;
-	return (ray);
 }
 
 void	draw_c_wall_f(t_cub3d *cub, t_ray ray, int x)
@@ -63,7 +51,6 @@ void	cast_fov(t_cub3d *cub)
 	{
 		ray.curr_ang = get_current_angle(ray.ray_start, ray.ang_inc, i);
 		ray.ray_dist = calculate_ray_distance(cub, &ray);
-		dda(cub, get_index(cub, ray.curr_ang, ray.ray_dist));
 		ray.wall_h = (int)(cub->hov / ray.ray_dist);
 		ray.wall_t = (cub->hov - ray.wall_h) / 2;
 		ray.wall_b = ray.wall_t + ray.wall_h;
