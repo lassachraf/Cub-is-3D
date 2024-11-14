@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:34:39 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/11/06 14:21:23 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/15 00:23:53 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	alloc_and_set(t_cub3d *cub)
 {
 	cub->player = calloc(1, sizeof(t_player));
 	if (cub->player == NULL)
-		ft_error(cub, "Error.");
+		ft_error(cub, "Error.\nAllocation failed.");
 	cub->player->fov = deg_to_rad(60);
 	cub->player->movespeed = 6;
 	cub->player->rotationspeed = 3 * (PI / 180);
@@ -64,5 +64,5 @@ void	get_player(t_cub3d *cub)
 		}
 	}
 	if (cub->player->count != 1)
-		ft_error(cub, "Error.");
+		ft_error(cub, "Error.\nThe game need one player.");
 }

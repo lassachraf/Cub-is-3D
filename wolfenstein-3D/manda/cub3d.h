@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/06 16:23:12 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/11/11 18:26:05 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/15 00:09:26 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,6 @@ long	ft_colors(t_cub3d *cub, char *s);
 int		ft_atoi_rgb(t_cub3d *cub, char *str);
 void	create_color(t_cub3d **cub, int type, char *s);
 
-void	ft_open(t_cub3d *cub, char *filename);
 void	ft_extension(char *mapfile, char *ext);
 
 int		is_map_element(char c);

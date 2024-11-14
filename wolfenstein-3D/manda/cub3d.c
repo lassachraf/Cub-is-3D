@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 12:06:54 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/11/11 21:20:27 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/15 00:25:24 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	cub3d(t_cub3d *cub)
 	cub->mlx = mlx_init();
 	cub->win = mlx_new_window(cub->mlx, cub->wov, cub->hov, "Cub-is-DDD !");
 	if (cub->win == NULL)
-		ft_error(cub, "Error.");
+		ft_error(cub, "Error.\nMlx fails to open new window.");
 	cub->img = mlx_new_image(cub->mlx, cub->wov, cub->hov);
 	if (cub->img == NULL)
-		ft_error(cub, "Error.");
+		ft_error(cub, "Error.\nMlx fails to create new image.");
 	cub->add = mlx_get_data_addr(cub->img, &cub->bpp, &cub->szl, &cub->end);
 	if (cub->add == NULL)
-		ft_error(cub, "Error.");
+		ft_error(cub, "Error.\nMlx fails to get the address of the image.");
 	load_textures(cub);
 	mlx_loop_hook(cub->mlx, cub_loop, cub);
 	mlx_hook(cub->win, 2, 1L << 0, ft_moving, cub);
@@ -40,7 +40,7 @@ void	init_cub3d(char *av)
 
 	cub = (t_cub3d *)ft_calloc(1, sizeof(t_cub3d));
 	if (cub == NULL)
-		ft_error(NULL, "Error.");
+		ft_error(NULL, "Error.\nAllocation failed.");
 	parsing(cub, av);
 	cub3d(cub);
 	general_free(cub);
@@ -49,7 +49,7 @@ void	init_cub3d(char *av)
 int	main(int ac, char **av)
 {
 	if (ac != 2)
-		return (ft_error(NULL, "Error."), 1);
+		return (ft_error(NULL, "Error.\nWrong number of arguments"), 1);
 	init_cub3d(av[1]);
 	return (1);
 }

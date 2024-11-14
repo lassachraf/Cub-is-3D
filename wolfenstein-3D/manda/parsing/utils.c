@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:06:19 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/26 16:12:49 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/15 00:35:47 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	double_check(t_cub3d *cub, char **line, int count)
 
 	i = 0;
 	if (count != 6)
-		ft_error(cub, "Error.");
+		ft_error(cub, "Error.\nMissing texture.");
 	if (**line && *line && !is_white_line(*line))
 	{
 		while ((*line)[i] && ft_isspace((*line)[i]))
@@ -45,7 +45,7 @@ void	double_check(t_cub3d *cub, char **line, int count)
 		if ((*line)[i] && !is_map_element((*line)[i]))
 		{
 			free(*line);
-			ft_error(cub, "Error.");
+			ft_error(cub, "Error.\nInvalid map element.");
 		}
 	}
 }

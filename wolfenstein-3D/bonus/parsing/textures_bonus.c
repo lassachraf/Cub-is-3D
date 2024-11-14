@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:20:27 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/11/06 12:56:05 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/15 00:24:19 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	add_texture(t_cub3d *cub, t_tex **tex, char *name)
 {
 	*tex = ft_calloc(1, sizeof(t_tex));
 	if (*tex == NULL)
-		ft_error(cub, "Error.");
+		ft_error(cub, "Error.\nAllocation failed.");
 	if (name[ft_strlen(name) - 1] == '\n')
 		name[ft_strlen(name) - 1] = '\0';
 	(*tex)->file = ft_strdup(name);
@@ -35,7 +35,7 @@ void	create_texture(t_cub3d **cub, int type, char *file)
 	else if (type == 5 && !(*cub)->door)
 		add_texture(*cub, &(*cub)->door, file);
 	else
-		ft_error(*cub, "Error.");
+		ft_error(*cub, "Error.\nCan't create texture.");
 }
 
 void	load_animation_textures(t_cub3d *cub)
@@ -57,11 +57,11 @@ void	load_animation_textures(t_cub3d *cub)
 		ani[i]->img = mlx_xpm_file_to_image(cub->mlx, ani[i]->file,
 				&ani[i]->width, &ani[i]->height);
 		if (ani[i]->img == NULL)
-			ft_error(cub, "Error.");
+			ft_error(cub, "Error.\nMlx fails to create image from xpm file.");
 		ani[i]->add = mlx_get_data_addr(ani[i]->img, &ani[i]->bpp,
 				&ani[i]->szl, &ani[i]->end);
 		if (ani[i]->add == NULL)
-			ft_error(cub, "Error.");
+			ft_error(cub, "Error.\nMlx fails to get the address of the image.");
 	}
 }
 
@@ -84,14 +84,14 @@ void	load_textures(t_cub3d *cub)
 	n->img = mlx_xpm_file_to_image(cub->mlx, n->file, &n->width, &n->height);
 	s->img = mlx_xpm_file_to_image(cub->mlx, s->file, &s->width, &s->height);
 	if (!d->img || !e->img || !w->img || !n->img || !s->img)
-		ft_error(cub, "Error.");
+		ft_error(cub, "Error.\nMlx fails to create image from xpm file.");
 	d->add = mlx_get_data_addr(d->img, &d->bpp, &d->szl, &d->end);
 	e->add = mlx_get_data_addr(e->img, &e->bpp, &e->szl, &e->end);
 	w->add = mlx_get_data_addr(w->img, &w->bpp, &w->szl, &w->end);
 	n->add = mlx_get_data_addr(n->img, &n->bpp, &n->szl, &n->end);
 	s->add = mlx_get_data_addr(s->img, &s->bpp, &s->szl, &s->end);
 	if (!d->add || !e->add || !w->add || !n->add || !s->add)
-		ft_error(cub, "Error.");
+		ft_error(cub, "Error.\nMlx fails to get the address of the image.");
 }
 
 int	get_texture_color(t_tex *texture, int x, int y)

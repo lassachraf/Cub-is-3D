@@ -6,7 +6,7 @@
 #    By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 16:20:15 by alassiqu          #+#    #+#              #
-#    Updated: 2024/11/06 23:23:38 by alassiqu         ###   ########.fr        #
+#    Updated: 2024/11/15 00:13:35 by alassiqu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		:=	cub3D
 BONUS		:=	cub3D_bonus
 
 CC			:=	cc
-CFLAGS		:=	-Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS		:=	-Wall -Wextra -Werror -fsanitize=address -g3
 
 LXFLAGS		:=	-I /usr/local/include -L /usr/local/lib -lmlx -lXext -lX11 -lm
 MCFLAGS		:=	-L ../mlx -lmlx -framework OpenGL -framework AppKit

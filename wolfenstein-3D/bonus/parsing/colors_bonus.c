@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   colors_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:18:44 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/26 16:12:30 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/15 00:08:47 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@ int	ft_atoi_rgb(t_cub3d *cub, char *str)
 
 	nb = 0;
 	if (!str)
-		ft_error(cub, "Error.");
+		ft_error(cub, "Error.\nColor with no value.");
 	while (*str && ft_isspace(*str))
 		str++;
 	if (*str == '-')
-		ft_error(cub, "Error.");
+		ft_error(cub, "Error.\nColor can't take negative value.");
 	if (*str == '+')
 		str++;
 	while (ft_isdigit(*str))
 	{
 		nb = (nb * 10) + (((*str) - '0'));
 		if (nb > 255)
-			ft_error(cub, "Error.");
+			ft_error(cub, "Error.\nColor should be between 0 and 255.");
 		str++;
 	}
 	if (*str && !ft_isdigit(*str) && !ft_isspace(*str))
-		ft_error(cub, "Error.");
+		ft_error(cub, "Error.\nInvalid color format.");
 	return (nb);
 }
 
@@ -50,7 +50,7 @@ long	ft_colors(t_cub3d *cub, char *s)
 	b = ft_atoi_rgb(cub, split[2]);
 	if (split[3])
 	{
-		ft_error(cub, "Error.");
+		ft_error(cub, "Error.\nInvalid color format.");
 		return (-1);
 	}
 	free_double(split);
@@ -63,7 +63,7 @@ void	create_color(t_cub3d **cub, int type, char *s)
 	{
 		(*cub)->map->colors = ft_calloc(1, sizeof(t_color));
 		if ((*cub)->map->colors == NULL)
-			ft_error(*cub, "Error.");
+			ft_error(*cub, "Error.\nAllocation failed.");
 	}
 	if (type == 1 && !(*cub)->map->colors->ceil)
 	{
@@ -76,5 +76,5 @@ void	create_color(t_cub3d **cub, int type, char *s)
 		(*cub)->map->colors->floor_h = ft_colors(*cub, s);
 	}
 	else
-		ft_error(*cub, "Error.");
+		ft_error(*cub, "Error.\nColor can't be created.");
 }

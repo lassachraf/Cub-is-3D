@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 15:32:32 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/30 15:45:46 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/15 00:32:34 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	general_check(t_cub3d *cub, char **map, int *i, int *j)
 	{
 		if (*i == 0 || *i == cub->map->height - 1 || *j == 0
 			|| *j == cub->map->width - 1)
-			ft_error(cub, "Error.");
+			ft_error(cub, "Error.\nInvalid map.");
 		if (s[(*i) - 1][*j] == ' ' || s[(*i) + 1][*j] == ' ' || s[*i][*j
 			- 1] == ' ' || s[*i][*j + 1] == ' ')
-			ft_error(cub, "Error.");
+			ft_error(cub, "Error.\nInvalid map.");
 	}
 	if (s[*i][*j] == 'D')
 	{
@@ -32,7 +32,7 @@ void	general_check(t_cub3d *cub, char **map, int *i, int *j)
 			|| (s[*i][*j - 1] == '1' && s[*i][*j + 1] == '1'))
 			return ;
 		else
-			ft_error(cub, "Error.");
+			ft_error(cub, "Error.\nInvalid map.");
 	}
 }
 
@@ -84,7 +84,7 @@ void	map_parsing(t_cub3d **cub, char **map)
 		while (map[i][j] && is_map_element(map[i][j]))
 			j++;
 		if (map[i][j] && !is_map_element(map[i][j]))
-			ft_error(*cub, "Error.");
+			ft_error(*cub, "Error.\nInvalid map element.");
 		if (j > (*cub)->map->width)
 			(*cub)->map->width = j;
 	}
@@ -100,9 +100,13 @@ void	get_2d_map(t_cub3d *cub, char *line)
 
 	lines = NULL;
 	while (line && line[0])
+	{
+		if (ft_strcmp(line, "\n") == 0)
+			ft_error(cub, "Error.\nEmpty line on map.");
 		lines = free_and_join(&line, &lines, cub->map->fd);
+	}
 	if (lines == NULL)
-		ft_error(cub, "Error.");
+		ft_error(cub, "Error.\nIs that an empty map ?");
 	map_2d = ft_split(lines, '\n');
 	free(lines);
 	map_parsing(&cub, map_2d);

@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 18:41:35 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/10/27 14:06:13 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/15 00:07:31 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	load_player(t_cub3d *cub)
 	cub->fstp->img = mlx_xpm_file_to_image(cub->mlx, "animation/ply-0.xpm",
 			&cub->fstp->width, &cub->fstp->height);
 	if (cub->fstp->img == NULL)
-		ft_error(cub, "Error.");
+		ft_error(cub, "Error.\nMlx fails to create image from xpm file.");
 	cub->fstp->add = mlx_get_data_addr(cub->fstp->img, &cub->fstp->bpp,
 			&cub->fstp->szl, &cub->fstp->end);
 	if (cub->fstp->add == NULL)
-		ft_error(cub, "Error.");
+		ft_error(cub, "Error.\nMlx fails to get the address of the image.");
 }
 
 void	draw_gun(t_cub3d *cub, int index)

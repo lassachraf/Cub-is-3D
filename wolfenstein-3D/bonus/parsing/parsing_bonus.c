@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:55:30 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/11/06 15:14:17 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/15 00:22:51 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	check_texture_color(t_cub3d **cub, char *line, int *count)
 	{
 		free(line);
 		free_double(split);
-		return (ft_error(*cub, "Error."), 0);
+		return (ft_error(*cub, "Error.\nBad clr/txt format."), 0);
 	}
 	if (!ft_strcmp(split[0], "NO") || !ft_strcmp(split[0], "SO")
 		|| !ft_strcmp(split[0], "EA") || !ft_strcmp(split[0], "WE")
@@ -73,7 +73,7 @@ void	get_textures_and_colors(t_cub3d *cub, char **line)
 		if (count < 6 && *line && *line[0])
 		{
 			if (check_texture_color(&cub, *line, &count) == 0)
-				ft_error(cub, "Error.");
+				ft_error(cub, "Error.\nInvalid map.");
 			free(*line);
 		}
 		*line = get_next_line(cub->map->fd);
@@ -99,10 +99,10 @@ void	parsing(t_cub3d *cub, char *av)
 	ft_extension(av, ".cub");
 	cub->map = ft_calloc(1, sizeof(*cub->map));
 	if (cub->map == NULL)
-		ft_error(cub, "Error.");
+		ft_error(NULL, "Error.\nAllocation failed.");
 	cub->map->fd = open(av, O_RDONLY);
 	if (cub->map->fd == -1)
-		ft_error(cub, "Error.");
+		ft_error(cub, "Error.\nOpen failed.");
 	get_file_content(cub);
 	create_texture(&cub, 5, "textures/door-wolfenstein.xpm");
 	i = -1;
@@ -110,9 +110,9 @@ void	parsing(t_cub3d *cub, char *av)
 	{
 		cub->map->ani[i] = ft_calloc(1, sizeof(t_tex));
 		if (cub->map->ani[i] == NULL)
-			ft_error(cub, "Error.");
+			ft_error(NULL, "Error.\nAllocation failed.");
 	}
 	cub->fstp = ft_calloc(1, sizeof(t_tex));
 	if (cub->fstp == NULL)
-		ft_error(cub, "Error.");
+		ft_error(NULL, "Error.\nAllocation failed.");
 }
