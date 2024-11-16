@@ -6,7 +6,7 @@
 /*   By: alassiqu <alassiqu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 14:55:30 by alassiqu          #+#    #+#             */
-/*   Updated: 2024/11/15 00:22:51 by alassiqu         ###   ########.fr       */
+/*   Updated: 2024/11/16 20:48:43 by alassiqu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_texture_color(t_cub3d **cub, char *line, int *count)
 	if (line == NULL)
 		return (1);
 	split = ft_split(line, ' ');
-	if (split == NULL || split[0] == NULL)
+	if (split == NULL || split[0] == NULL || split[1] == NULL)
 		return (1);
 	if (split[2] && ft_strcmp(split[2], "\n"))
 	{
