@@ -35,9 +35,49 @@ The project includes several core elements within the game environment:
 
 ### Compilation and Execution
 
-To run the Cub3D project:
+First, clone the repository :
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/lassachraf/Cub-is-3D.git
-   cd Cub-is-3D
+```bash
+git clone https://github.com/lassachraf/Cub-is-3D.git
+```
+```bash
+cd Cub-is-3D
+```
+
+* For mandatory :
+* Compile the mandatory.
+``` bash
+make
+```
+* Run the mandatory with a valid map file:
+``` bash
+./cub3D maps/maze-manda.cub
+```
+
+* For bonus :
+* Compile the bonus.
+``` bash
+make bonus
+```
+* Run the bonus with a valid map file:
+``` bash
+./cub3d_bonus maps/maze-bonus.cub
+```
+*PS* There is some maps on the folder, don't hesitate to choose any to have different map each time.
+
+### Challenges
+
+    * **Ray-Casting Logic:** Calculating accurate angles and distances for rendering walls is crucial.
+    * **Texture Alignment:** Ensuring that textures appear correctly from all angles is essential for a realistic experience.
+    * **Collision Detection:** Properly implementing collision mechanics requires attention to edge cases.
+
+# Learning Outcomes
+
+    * **Graphics Programming:** Gain experience in graphics rendering and low-level graphics operations.
+    * **Ray-Casting Techniques:** Understand the principles of ray-casting and its applications in 3D graphics.
+    * **Game Development Basics:** Learn essential game development concepts, including movement, collision detection, and environment rendering.
+    * **Optimization:** Writing efficient code that performs well in a graphics-heavy environment.
+
+# Project score:
+
+![](https://blog.kakaocdn.net/dn/ccOHbk/btrmXuGtLet/JzUaL05K8W5AgwZqFkKjC0/img.png)
